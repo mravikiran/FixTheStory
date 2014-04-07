@@ -10,6 +10,5 @@
 
 @interface FixTheStoryBaseViewController : UIViewController
 
-@property (strong,nonatomic) UIViewController* parent;
 
 @end

@@ -25,6 +25,17 @@
 		06940D5218C177B5002C1A42 /* FixTheStoryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 06940D5118C177B5002C1A42 /* FixTheStoryTests.m */; };
 		06940D5D18DE4392002C1A42 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06940D5C18DE4392002C1A42 /* SettingsViewController.m */; };
 		06940D6018DE44A7002C1A42 /* RulesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06940D5F18DE44A6002C1A42 /* RulesViewController.m */; };
+		069AF07E18EA2D640045338E /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069AF07D18EA2D640045338E /* PlayViewController.m */; };
+		069AF08418EB8B690045338E /* StageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 069AF08318EB8B690045338E /* StageViewController.m */; };
+		069AF08818EBA9810045338E /* RearrangeCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 069AF08718EBA9810045338E /* RearrangeCollectionViewLayout.m */; };
+		069AF08B18EBB5510045338E /* StagePhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 069AF08A18EBB5510045338E /* StagePhotoCell.m */; };
+		069AF09418ECD1810045338E /* img1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF08D18ECD1810045338E /* img1.jpg */; };
+		069AF09518ECD1810045338E /* img2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF08E18ECD1810045338E /* img2.jpg */; };
+		069AF09618ECD1810045338E /* img3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF08F18ECD1810045338E /* img3.jpg */; };
+		069AF09718ECD1810045338E /* img4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF09018ECD1810045338E /* img4.jpg */; };
+		069AF09818ECD1810045338E /* img5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF09118ECD1810045338E /* img5.jpg */; };
+		069AF09918ECD1810045338E /* img6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF09218ECD1810045338E /* img6.jpg */; };
+		069AF09A18ECD1810045338E /* img7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 069AF09318ECD1810045338E /* img7.jpg */; };
 		06CA0A3D18E2670B00038824 /* ContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CA0A3C18E2670B00038824 /* ContainerViewController.m */; };
 		06CA0A4018E3C4A600038824 /* ViewControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 06CA0A3F18E3C4A600038824 /* ViewControllerFactory.m */; };
 /* End PBXBuildFile section */
@@ -66,6 +77,21 @@
 		06940D5C18DE4392002C1A42 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		06940D5E18DE44A6002C1A42 /* RulesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RulesViewController.h; sourceTree = "<group>"; };
 		06940D5F18DE44A6002C1A42 /* RulesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RulesViewController.m; sourceTree = "<group>"; };
+		069AF07C18EA2D640045338E /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
+		069AF07D18EA2D640045338E /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		069AF08218EB8B690045338E /* StageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StageViewController.h; sourceTree = "<group>"; };
+		069AF08318EB8B690045338E /* StageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StageViewController.m; sourceTree = "<group>"; };
+		069AF08618EBA9810045338E /* RearrangeCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RearrangeCollectionViewLayout.h; sourceTree = "<group>"; };
+		069AF08718EBA9810045338E /* RearrangeCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RearrangeCollectionViewLayout.m; sourceTree = "<group>"; };
+		069AF08918EBB5510045338E /* StagePhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StagePhotoCell.h; sourceTree = "<group>"; };
+		069AF08A18EBB5510045338E /* StagePhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StagePhotoCell.m; sourceTree = "<group>"; };
+		069AF08D18ECD1810045338E /* img1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img1.jpg; sourceTree = "<group>"; };
+		069AF08E18ECD1810045338E /* img2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img2.jpg; sourceTree = "<group>"; };
+		069AF08F18ECD1810045338E /* img3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img3.jpg; sourceTree = "<group>"; };
+		069AF09018ECD1810045338E /* img4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img4.jpg; sourceTree = "<group>"; };
+		069AF09118ECD1810045338E /* img5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img5.jpg; sourceTree = "<group>"; };
+		069AF09218ECD1810045338E /* img6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img6.jpg; sourceTree = "<group>"; };
+		069AF09318ECD1810045338E /* img7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img7.jpg; sourceTree = "<group>"; };
 		06CA0A3B18E2670B00038824 /* ContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContainerViewController.h; sourceTree = "<group>"; };
 		06CA0A3C18E2670B00038824 /* ContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContainerViewController.m; sourceTree = "<group>"; };
 		06CA0A3E18E3C4A600038824 /* ViewControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewControllerFactory.h; sourceTree = "<group>"; };
@@ -129,6 +155,8 @@
 		06940D2918C177B4002C1A42 /* FixTheStory */ = {
 			isa = PBXGroup;
 			children = (
+				069AF08C18ECD14A0045338E /* Images */,
+				069AF08518EBA9240045338E /* CollectionViewClasses */,
 				06940D3218C177B4002C1A42 /* AppDelegate.h */,
 				06940D3318C177B4002C1A42 /* AppDelegate.m */,
 				06940D3518C177B4002C1A42 /* Main_iPhone.storyboard */,
@@ -147,6 +175,10 @@
 				06CA0A3F18E3C4A600038824 /* ViewControllerFactory.m */,
 				068B543D18E50CAF0096F16B /* FixTheStoryBaseViewController.h */,
 				068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */,
+				069AF07C18EA2D640045338E /* PlayViewController.h */,
+				069AF07D18EA2D640045338E /* PlayViewController.m */,
+				069AF08218EB8B690045338E /* StageViewController.h */,
+				069AF08318EB8B690045338E /* StageViewController.m */,
 			);
 			path = FixTheStory;
 			sourceTree = "<group>";
@@ -178,6 +210,31 @@
 				06940D4E18C177B5002C1A42 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		069AF08518EBA9240045338E /* CollectionViewClasses */ = {
+			isa = PBXGroup;
+			children = (
+				069AF08618EBA9810045338E /* RearrangeCollectionViewLayout.h */,
+				069AF08718EBA9810045338E /* RearrangeCollectionViewLayout.m */,
+				069AF08918EBB5510045338E /* StagePhotoCell.h */,
+				069AF08A18EBB5510045338E /* StagePhotoCell.m */,
+			);
+			name = CollectionViewClasses;
+			sourceTree = "<group>";
+		};
+		069AF08C18ECD14A0045338E /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				069AF08D18ECD1810045338E /* img1.jpg */,
+				069AF08E18ECD1810045338E /* img2.jpg */,
+				069AF08F18ECD1810045338E /* img3.jpg */,
+				069AF09018ECD1810045338E /* img4.jpg */,
+				069AF09118ECD1810045338E /* img5.jpg */,
+				069AF09218ECD1810045338E /* img6.jpg */,
+				069AF09318ECD1810045338E /* img7.jpg */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,9 +314,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				06940D3A18C177B4002C1A42 /* Main_iPad.storyboard in Resources */,
+				069AF09718ECD1810045338E /* img4.jpg in Resources */,
+				069AF09618ECD1810045338E /* img3.jpg in Resources */,
+				069AF09918ECD1810045338E /* img6.jpg in Resources */,
 				06940D3F18C177B5002C1A42 /* Images.xcassets in Resources */,
 				06940D3718C177B4002C1A42 /* Main_iPhone.storyboard in Resources */,
+				069AF09A18ECD1810045338E /* img7.jpg in Resources */,
+				069AF09418ECD1810045338E /* img1.jpg in Resources */,
 				06940D2E18C177B4002C1A42 /* InfoPlist.strings in Resources */,
+				069AF09518ECD1810045338E /* img2.jpg in Resources */,
+				069AF09818ECD1810045338E /* img5.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,12 +344,16 @@
 			files = (
 				06940D6018DE44A7002C1A42 /* RulesViewController.m in Sources */,
 				06940D3D18C177B4002C1A42 /* RootViewController.m in Sources */,
+				069AF08818EBA9810045338E /* RearrangeCollectionViewLayout.m in Sources */,
 				06940D3418C177B4002C1A42 /* AppDelegate.m in Sources */,
 				06CA0A4018E3C4A600038824 /* ViewControllerFactory.m in Sources */,
+				069AF08B18EBB5510045338E /* StagePhotoCell.m in Sources */,
 				06940D3018C177B4002C1A42 /* main.m in Sources */,
 				068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */,
 				06CA0A3D18E2670B00038824 /* ContainerViewController.m in Sources */,
+				069AF07E18EA2D640045338E /* PlayViewController.m in Sources */,
 				06940D5D18DE4392002C1A42 /* SettingsViewController.m in Sources */,
+				069AF08418EB8B690045338E /* StageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

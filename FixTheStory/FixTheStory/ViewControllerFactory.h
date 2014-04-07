@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ContainerViewController.h"
+#import "FixTheStoryBaseViewController.h"
 
 @interface ViewControllerFactory : NSObject
 
-+ (UIViewController*) getViewControllerOfType:(NSString*)vctype initWithParent:(ContainerViewController*)parent;
-
++ (FixTheStoryBaseViewController*) getViewControllerOfType:(NSString*)vctype;
 
 @end

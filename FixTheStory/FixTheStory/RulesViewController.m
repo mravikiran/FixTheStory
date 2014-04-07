@@ -44,5 +44,18 @@
 }
 
 - (IBAction)onPlay:(id)sender {
+    if ([self parentViewController]) {
+        [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"play"];
+        
+    }
+
+}
+
+- (IBAction)onSettings:(id)sender {
+    
+    if ([self parentViewController]) {
+        [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"settings"];
+        
+    }
 }
 @end

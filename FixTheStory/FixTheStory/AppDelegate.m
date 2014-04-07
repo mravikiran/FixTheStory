@@ -19,14 +19,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     ContainerViewController * containerViewController = [[ContainerViewController alloc] init];
     
-   /* UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+   UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
     
     RootViewController * rvc = [storyboard instantiateViewControllerWithIdentifier:@"RootViewController_ID"];
     
-    rvc.parent = containerViewController;
     
     [containerViewController setCurrentSubViewController:rvc];
-    */
+    
     
     self.window.rootViewController = containerViewController;
     

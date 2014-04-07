@@ -23,7 +23,7 @@
     UIView * containerView;
 
 }
-
+/*
 - (id) init
 {
     if ([super init]) {
@@ -42,7 +42,7 @@
         
     }
     return self;
-}
+}*/
 
 - (void) loadView
 {
@@ -107,26 +107,14 @@
 
 - (void) spewSomething
 {
-    NSLog(@"This should get called");
+    NSLog(@"This should spew Something");
 }
 
-- (UIViewController*) getViewControllerOfType:(NSString*)vctype
-{
-    if ([vctype isEqualToString:@"root"]) {
-        return subViewControllers[0];
-    }
-    if ([vctype isEqualToString:@"settings"]) {
-        return subViewControllers[1];
-    }
-    if ([vctype isEqualToString:@"rules"]) {
-        return subViewControllers[2];
-    }
-    return nil;
-}
+
 
 - (void) showViewControllerWithName:(NSString*)vctype
 {
-   __block UIViewController * toVC = [self getViewControllerOfType:vctype];
+    __block UIViewController * toVC = [ViewControllerFactory getViewControllerOfType:vctype];
     
     if (!toVC) {
         //do nothing

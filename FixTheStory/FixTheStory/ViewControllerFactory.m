@@ -11,10 +11,11 @@
 #import "RulesViewController.h"
 #import "RootViewController.h"
 #import "FixTheStoryBaseViewController.h"
+#import "PlayViewController.h"
 
 @implementation ViewControllerFactory
 
-+ (UIViewController*) getViewControllerOfType:(NSString*)vctype initWithParent:(ContainerViewController *)parent
++ (FixTheStoryBaseViewController*) getViewControllerOfType:(NSString*)vctype
 {
     FixTheStoryBaseViewController * vc = nil;
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
@@ -30,8 +31,16 @@
     {
         vc = [storyboard instantiateViewControllerWithIdentifier:@"RootViewController_ID" ];
     }
+    else if ([vctype isEqualToString:@"play"])
+    {
+        vc = [storyboard instantiateViewControllerWithIdentifier:@"PlayViewController_ID" ];
+    }
+    else if ([vctype isEqualToString:@"stage"])
+    {
+        vc = [storyboard instantiateViewControllerWithIdentifier:@"StageViewController_ID" ];
+        
+    }
     
-    vc.parent = parent;
     return vc;
 }
 

@@ -11,8 +11,10 @@
 
 @interface RulesViewController : FixTheStoryBaseViewController
 @property (weak, nonatomic) IBOutlet UIButton *mainButton;
+@property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 - (IBAction)onMain:(id)sender;
 - (IBAction)onPlay:(id)sender;
+- (IBAction)onSettings:(id)sender;
 
 @end

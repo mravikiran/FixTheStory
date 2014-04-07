@@ -59,6 +59,12 @@
 }
 
 - (IBAction)onPlay:(id)sender {
+    
+    if ([self parentViewController]) {
+        [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"play"];
+        
+    }
+
 }
 
 - (IBAction)onRules:(id)sender {
