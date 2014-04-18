@@ -10,6 +10,19 @@
 
 static  NSString * const collectionViewKey = @"collectionView";
 
+@interface RearrangeCollectionViewLayout ()
+
+@property (strong, nonatomic) NSIndexPath *selectedItemIndexPath;
+@property (strong, nonatomic) NSIndexPath *toItemIndexPath;
+@property (strong, nonatomic) UIView *currentView;
+@property (assign, nonatomic) CGPoint currentViewCenter;
+@property (assign, nonatomic) CGPoint panStartPoint;
+@property (assign, nonatomic) BOOL startMoving;
+
+@property (assign, nonatomic) CGPoint panTranslationInCollectionView;
+
+@end
+
 @implementation RearrangeCollectionViewLayout
 
 
@@ -25,6 +38,14 @@ static  NSString * const collectionViewKey = @"collectionView";
     return self;
 }
 
+- (void) setDefaults
+{
+    self.startMoving=false;
+    self.selectedItemIndexPath=nil;
+    
+    
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super init];
@@ -38,9 +59,9 @@ static  NSString * const collectionViewKey = @"collectionView";
 
 - (void)setup
 {
-    self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 13.0f, 22.0f);
+    self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 22.0f, 22.0f);
     self.itemSize = CGSizeMake(100.0f, 100.0f);
-    self.interItemSpacingY = 12.0f;
+    self.interItemSpacingY = 10.0f;
     self.numberOfColumns = 2;
 }
 
@@ -60,20 +81,82 @@ static  NSString * const collectionViewKey = @"collectionView";
     [self setupGestureRecognizers];
 }
 
+#pragma Non-UI methods
+
+- (void) findSelectedItemIndexMoveToPosition {
+    if (self.selectedItemIndexPath) {
+        UICollectionViewLayoutAttributes * selectedCellLayoutAttributes = self.layoutInfo[self.selectedItemIndexPath];
+        
+        CGRect selectedCellLayoutAttributesFrame= CGRectMake(selectedCellLayoutAttributes.frame.origin.x+ self.panTranslationInCollectionView.x,selectedCellLayoutAttributes.frame.origin.y+ self.panTranslationInCollectionView.y,selectedCellLayoutAttributes.frame.size.width,selectedCellLayoutAttributes.frame.size.height);
+
+        CGFloat areaOfUICollectionViewCell = selectedCellLayoutAttributes.frame.size.width*selectedCellLayoutAttributes.frame.size.height;
+        for (NSIndexPath * indexPath in self.layoutInfo) {
+            self.toItemIndexPath = nil;
+            if (![indexPath isEqual:self.selectedItemIndexPath]) {
+                UICollectionViewLayoutAttributes * currentAttributes = [self.layoutInfo objectForKey:indexPath];
+                CGRect intersectedRegion = CGRectIntersection(currentAttributes.frame, selectedCellLayoutAttributesFrame);
+                
+               // NSLog(@"TO Cell %f,%f,%f,%f",currentAttributes.frame.origin.x,currentAttributes.frame.origin.y,currentAttributes.frame.size.width,currentAttributes.frame.size.height);
+               // NSLog(@"Selected Cell %f,%f,%f,%f",selectedCellLayoutAttributesFrame.origin.x,selectedCellLayoutAttributesFrame.origin.y,selectedCellLayoutAttributesFrame.size.width,selectedCellLayoutAttributesFrame.size.height);
+                
+                if(!CGRectIsNull(intersectedRegion)){
+                    if (intersectedRegion.size.width * intersectedRegion.size.height > areaOfUICollectionViewCell/4) {
+                        self.toItemIndexPath = indexPath;
+                        NSLog(@"%ld",self.toItemIndexPath.row);
+                        break;
+                    }
+                }
+            
+            }
+        
+        }
+    }
+    
+}
+
 #pragma custom selectors
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)gestureRecognizer {
     
-    NSLog(@"gestureRecognizer connected");
     
     switch (gestureRecognizer.state) {
-        case UIGestureRecognizerStateBegan:
-            break;
+        case UIGestureRecognizerStateBegan: {
             
+            self.panStartPoint = [gestureRecognizer locationInView:self.collectionView];
+            
+            self.selectedItemIndexPath= [self.collectionView indexPathForItemAtPoint:[gestureRecognizer locationInView:self.collectionView]];
+            
+            if(self.selectedItemIndexPath!=nil){
+               // NSLog(@"the current cell to be moved %ld and hte starting point is %f,%f",self.selectedItemIndexPath.row,_panStartPoint.x,_panStartPoint.y);
+                self.startMoving = true;
+            }
+           
+            
+            
+            break;
+    }
+        case UIGestureRecognizerStateChanged: {
+            self.panTranslationInCollectionView = [gestureRecognizer translationInView:self.collectionView];
+           // NSLog(@"%f,%f",_panTranslationInCollectionView.x,_panTranslationInCollectionView.y);
+            [self findSelectedItemIndexMoveToPosition];
+            [self invalidateLayout]; // This calls prepareLayout and then layoutAttributesForElementsInRect
+            break;
+        }
+        case UIGestureRecognizerStateEnded:{
+            
+            self.selectedItemIndexPath = nil;
+            self.toItemIndexPath = nil;
+            self.startMoving=false;
+            [self invalidateLayout];
+
+            break;
+        }
         default:
             break;
     }
 }
+
+
 
 - (void)handleApplicationWillResignActive:(NSNotification *)notification {
     self.panGestureRecognizer.enabled = NO;
@@ -99,7 +182,8 @@ static  NSString * const collectionViewKey = @"collectionView";
                 UICollectionViewLayoutAttributes *itemAttributes =
             [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
             itemAttributes.frame = [self frameForStagePhotoAtIndexPath:indexPath];
-            
+        
+        
             cellLayoutInfo[indexPath] = itemAttributes;
         }
     
@@ -114,16 +198,17 @@ static  NSString * const collectionViewKey = @"collectionView";
     NSInteger column = indexPath.row % self.numberOfColumns;
     
     CGFloat spacingX = self.collectionView.bounds.size.width -
-    self.itemInsets.left -
-    self.itemInsets.right -
+    //self.itemInsets.left -
+    //self.itemInsets.right -
     (self.numberOfColumns * self.itemSize.width);
     
     if (self.numberOfColumns > 1) spacingX = spacingX / (self.numberOfColumns - 1);
     
-    CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
-    
-    CGFloat originY = floor(self.itemInsets.top +
-                            (self.itemSize.height + self.interItemSpacingY) * row);
+    //CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
+    CGFloat originX = floorf((self.itemSize.width + spacingX) * column);
+
+    //CGFloat originY = floor(self.itemInsets.top +
+    CGFloat originY = floor((self.itemSize.height + self.interItemSpacingY) * row);
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.height);
 }
@@ -144,8 +229,18 @@ static  NSString * const collectionViewKey = @"collectionView";
         [self.layoutInfo enumerateKeysAndObjectsUsingBlock:^(NSIndexPath *indexPath,
                                                           UICollectionViewLayoutAttributes *attributes,
                                                           BOOL *innerStop) {
+            
+            UICollectionViewLayoutAttributes * attributesCopy = [[UICollectionViewLayoutAttributes alloc] init];
+            attributesCopy = [attributes copy];
+            
             if (CGRectIntersectsRect(rect, attributes.frame)) {
-                [allAttributes addObject:attributes];
+                if(self.startMoving && [indexPath isEqual:self.selectedItemIndexPath]) {
+                    
+                attributesCopy.frame= CGRectMake(attributes.frame.origin.x+ self.panTranslationInCollectionView.x,attributes.frame.origin.y+ self.panTranslationInCollectionView.y,attributes.frame.size.width,attributes.frame.size.height);
+                   // NSLog(@"%f,%f,%f,%f",attributes.frame.origin.x,attributes.frame.origin.y,attributes.frame.size.width,attributes.frame.size.height);
+
+                }
+                [allAttributes addObject:attributesCopy];
             }
         }];
     
