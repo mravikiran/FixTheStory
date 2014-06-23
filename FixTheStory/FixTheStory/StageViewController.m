@@ -81,6 +81,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     NSString * imageName = [NSString stringWithFormat:@"img%ld.jpg",indexPath.row+1];
     
     photoCell.imageView.image = [UIImage imageNamed:imageName];
+    photoCell.uid = indexPath.row;
     
     return photoCell;
 }

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060A8B761946BA58006A7B5A /* StoryXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 060A8B751946BA58006A7B5A /* StoryXMLParser.m */; };
+		060A8B7B19480F80006A7B5A /* stories.xml in Resources */ = {isa = PBXBuildFile; fileRef = 060A8B7A19480F80006A7B5A /* stories.xml */; };
+		060A8B7E194810FA006A7B5A /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = 060A8B7D194810FA006A7B5A /* Story.m */; };
 		068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */; };
 		06940D2418C177B4002C1A42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2318C177B4002C1A42 /* Foundation.framework */; };
 		06940D2618C177B4002C1A42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2518C177B4002C1A42 /* CoreGraphics.framework */; };
@@ -51,6 +54,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		060A8B741946BA58006A7B5A /* StoryXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryXMLParser.h; sourceTree = "<group>"; };
+		060A8B751946BA58006A7B5A /* StoryXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryXMLParser.m; sourceTree = "<group>"; };
+		060A8B7A19480F80006A7B5A /* stories.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = stories.xml; sourceTree = "<group>"; };
+		060A8B7C194810FA006A7B5A /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Story.h; sourceTree = "<group>"; };
+		060A8B7D194810FA006A7B5A /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Story.m; sourceTree = "<group>"; };
 		068B543D18E50CAF0096F16B /* FixTheStoryBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTheStoryBaseViewController.h; sourceTree = "<group>"; };
 		068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTheStoryBaseViewController.m; sourceTree = "<group>"; };
 		06940D2018C177B4002C1A42 /* FixTheStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FixTheStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +130,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		060A8B731946BA23006A7B5A /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				060A8B741946BA58006A7B5A /* StoryXMLParser.h */,
+				060A8B751946BA58006A7B5A /* StoryXMLParser.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		060A8B7919480F55006A7B5A /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				060A8B7A19480F80006A7B5A /* stories.xml */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		06940D1718C177B4002C1A42 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +180,9 @@
 		06940D2918C177B4002C1A42 /* FixTheStory */ = {
 			isa = PBXGroup;
 			children = (
+				060A8B7919480F55006A7B5A /* Data */,
+				060A8B731946BA23006A7B5A /* Utilities */,
+				06967BE119038E910040AD9F /* External Files */,
 				069AF08C18ECD14A0045338E /* Images */,
 				069AF08518EBA9240045338E /* CollectionViewClasses */,
 				06940D3218C177B4002C1A42 /* AppDelegate.h */,
@@ -179,6 +207,8 @@
 				069AF07D18EA2D640045338E /* PlayViewController.m */,
 				069AF08218EB8B690045338E /* StageViewController.h */,
 				069AF08318EB8B690045338E /* StageViewController.m */,
+				060A8B7C194810FA006A7B5A /* Story.h */,
+				060A8B7D194810FA006A7B5A /* Story.m */,
 			);
 			path = FixTheStory;
 			sourceTree = "<group>";
@@ -210,6 +240,13 @@
 				06940D4E18C177B5002C1A42 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06967BE119038E910040AD9F /* External Files */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "External Files";
 			sourceTree = "<group>";
 		};
 		069AF08518EBA9240045338E /* CollectionViewClasses */ = {
@@ -316,6 +353,7 @@
 				06940D3A18C177B4002C1A42 /* Main_iPad.storyboard in Resources */,
 				069AF09718ECD1810045338E /* img4.jpg in Resources */,
 				069AF09618ECD1810045338E /* img3.jpg in Resources */,
+				060A8B7B19480F80006A7B5A /* stories.xml in Resources */,
 				069AF09918ECD1810045338E /* img6.jpg in Resources */,
 				06940D3F18C177B5002C1A42 /* Images.xcassets in Resources */,
 				06940D3718C177B4002C1A42 /* Main_iPhone.storyboard in Resources */,
@@ -343,11 +381,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				06940D6018DE44A7002C1A42 /* RulesViewController.m in Sources */,
+				060A8B7E194810FA006A7B5A /* Story.m in Sources */,
 				06940D3D18C177B4002C1A42 /* RootViewController.m in Sources */,
 				069AF08818EBA9810045338E /* RearrangeCollectionViewLayout.m in Sources */,
 				06940D3418C177B4002C1A42 /* AppDelegate.m in Sources */,
 				06CA0A4018E3C4A600038824 /* ViewControllerFactory.m in Sources */,
 				069AF08B18EBB5510045338E /* StagePhotoCell.m in Sources */,
+				060A8B761946BA58006A7B5A /* StoryXMLParser.m in Sources */,
 				06940D3018C177B4002C1A42 /* main.m in Sources */,
 				068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */,
 				06CA0A3D18E2670B00038824 /* ContainerViewController.m in Sources */,
@@ -443,8 +483,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				"HEADER_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"/usr/include/libxml2/**",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = /usr/lib/;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -477,6 +524,8 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = /usr/lib/;
+				OTHER_LDFLAGS = "-lxml2";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

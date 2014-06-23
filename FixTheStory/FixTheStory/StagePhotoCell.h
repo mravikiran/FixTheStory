@@ -12,5 +12,6 @@
 @interface StagePhotoCell : UICollectionViewCell
 
 @property (strong,atomic) UIImageView * imageView;
+@property (atomic) NSInteger uid;
 
 @end

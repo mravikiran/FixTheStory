@@ -7,6 +7,7 @@
 //
 
 #import "RearrangeCollectionViewLayout.h"
+#import "StagePhotoCell.h"
 
 static  NSString * const collectionViewKey = @"collectionView";
 
@@ -61,7 +62,8 @@ static  NSString * const collectionViewKey = @"collectionView";
 {
     self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 22.0f, 22.0f);
     self.itemSize = CGSizeMake(100.0f, 100.0f);
-    self.interItemSpacingY = 10.0f;
+    self.interItemSpacingY = 20.0f;
+    self.interItemSpacingX = 10.0f;
     self.numberOfColumns = 2;
 }
 
@@ -87,7 +89,8 @@ static  NSString * const collectionViewKey = @"collectionView";
     if (self.selectedItemIndexPath) {
         UICollectionViewLayoutAttributes * selectedCellLayoutAttributes = self.layoutInfo[self.selectedItemIndexPath];
         
-        CGRect selectedCellLayoutAttributesFrame= CGRectMake(selectedCellLayoutAttributes.frame.origin.x+ self.panTranslationInCollectionView.x,selectedCellLayoutAttributes.frame.origin.y+ self.panTranslationInCollectionView.y,selectedCellLayoutAttributes.frame.size.width,selectedCellLayoutAttributes.frame.size.height);
+        //CGRect selectedCellLayoutAttributesFrame= CGRectMake(selectedCellLayoutAttributes.frame.origin.x+ self.panTranslationInCollectionView.x,selectedCellLayoutAttributes.frame.origin.y+ self.panTranslationInCollectionView.y,selectedCellLayoutAttributes.frame.size.width,selectedCellLayoutAttributes.frame.size.height);
+        CGRect selectedCellLayoutAttributesFrame = selectedCellLayoutAttributes.frame;
 
         CGFloat areaOfUICollectionViewCell = selectedCellLayoutAttributes.frame.size.width*selectedCellLayoutAttributes.frame.size.height;
         for (NSIndexPath * indexPath in self.layoutInfo) {
@@ -143,11 +146,24 @@ static  NSString * const collectionViewKey = @"collectionView";
             break;
         }
         case UIGestureRecognizerStateEnded:{
+            self.startMoving=false;
+            if (self.toItemIndexPath) {
+                [self.collectionView  performBatchUpdates:^{
+                    [self.collectionView moveItemAtIndexPath:self.selectedItemIndexPath toIndexPath:self.toItemIndexPath];
+                    [self.collectionView moveItemAtIndexPath:self.toItemIndexPath toIndexPath:self.selectedItemIndexPath];} completion:^(BOOL finished){}];
+            }
+            else{
+                [self.collectionView  performBatchUpdates:^{
+                    [self invalidateLayout];} completion:^(BOOL finished){}];
+            }
             
             self.selectedItemIndexPath = nil;
             self.toItemIndexPath = nil;
-            self.startMoving=false;
-            [self invalidateLayout];
+           /* NSArray * photoCells = [self.collectionView visibleCells];
+            for (StagePhotoCell * uivcell in photoCells) {
+                NSLog(@"%ld",(long)uivcell.uid);
+            }*/
+            //[self invalidateLayout];
 
             break;
         }
@@ -198,17 +214,18 @@ static  NSString * const collectionViewKey = @"collectionView";
     NSInteger column = indexPath.row % self.numberOfColumns;
     
     CGFloat spacingX = self.collectionView.bounds.size.width -
-    //self.itemInsets.left -
-    //self.itemInsets.right -
+    self.itemInsets.left -
+    self.itemInsets.right -
     (self.numberOfColumns * self.itemSize.width);
     
-    if (self.numberOfColumns > 1) spacingX = spacingX / (self.numberOfColumns - 1);
+   // if (self.numberOfColumns > 1) spacingX = spacingX / (self.numberOfColumns - 1);
+    if (self.numberOfColumns > 1) spacingX = spacingX / self.numberOfColumns;
     
     //CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
-    CGFloat originX = floorf((self.itemSize.width + spacingX) * column);
+    CGFloat originX = floorf((self.itemSize.width + spacingX) * column+(spacingX/2) +self.itemInsets.left );
 
     //CGFloat originY = floor(self.itemInsets.top +
-    CGFloat originY = floor((self.itemSize.height + self.interItemSpacingY) * row);
+    CGFloat originY = floor(self.itemInsets.top + (self.itemSize.height + self.interItemSpacingY) * row);
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.height);
 }
@@ -236,11 +253,11 @@ static  NSString * const collectionViewKey = @"collectionView";
             if (CGRectIntersectsRect(rect, attributes.frame)) {
                 if(self.startMoving && [indexPath isEqual:self.selectedItemIndexPath]) {
                     
-                attributesCopy.frame= CGRectMake(attributes.frame.origin.x+ self.panTranslationInCollectionView.x,attributes.frame.origin.y+ self.panTranslationInCollectionView.y,attributes.frame.size.width,attributes.frame.size.height);
+                attributes.frame= CGRectMake(attributes.frame.origin.x+ self.panTranslationInCollectionView.x,attributes.frame.origin.y+ self.panTranslationInCollectionView.y,attributes.frame.size.width,attributes.frame.size.height);
                    // NSLog(@"%f,%f,%f,%f",attributes.frame.origin.x,attributes.frame.origin.y,attributes.frame.size.width,attributes.frame.size.height);
 
                 }
-                [allAttributes addObject:attributesCopy];
+                [allAttributes addObject:attributes];
             }
         }];
     

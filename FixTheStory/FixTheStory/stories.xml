@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<level number="1">
+    <story number="1">
+        <image id="10">when</image>
+        <image id="14">the</image>
+        <image id="16">going</image>
+        <image id="18">gets</image>
+    </story>
+    <story number="2">
+        <image id="16">tough</image>
+        <image id="13">the</image>
+        <image id="10">tough</image>
+        <image id="18">gets</image>
+    </story>
+
+    <story number="3">
+        <image id="56">going</image>
+        <image id="88">when</image>
+        <image id="94">are</image>
+        <image id="23">gringe</image>
+    </story>
+
+</level>

@@ -11,6 +11,7 @@
 #import "RootViewController.h"
 #import "SettingsViewController.h"
 #import "RulesViewController.h"
+#import "StoryXMLParser.h"
 
 @interface ContainerViewController ()
 
@@ -66,6 +67,13 @@
 
 - (void)viewDidLoad
 {
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"stories"
+                                                     ofType:@"xml"];
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    StoryXMLParser * storyParser = [[StoryXMLParser alloc] initWithData:data];
+    [storyParser setDelegate:storyParser];
+    BOOL result = [storyParser parse];
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -136,6 +144,60 @@
     [toVC didMoveToParentViewController:self];
 
     currentSubViewController = toVC;
+    
+    
+}
+
+
+#pragma xml parsing
+
+- (void)parser:(NSXMLParser *)parser
+didStartElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName
+    attributes:(NSDictionary *)attributeDict {
+    
+    if ([elementName isEqualToString:@"level"]) {
+        NSLog(@"Level started");
+        
+    }
+    else
+        if ([elementName isEqualToString:@"story"]) {
+            NSLog(@"Story started");
+            
+        }
+        else
+            if ([elementName isEqualToString:@"image"]) {
+                NSLog(@"image started");
+            }
+            else{
+                NSLog(@"%@",elementName);
+            }
+    
+    
+}
+
+- (void)parser:(NSXMLParser *)parser
+ didEndElement:(NSString *)elementName
+  namespaceURI:(NSString *)namespaceURI
+ qualifiedName:(NSString *)qName {
+    
+    if ([elementName isEqualToString:@"level"]) {
+        NSLog(@"Level end");
+        
+    }
+    else
+        if ([elementName isEqualToString:@"story"]) {
+            NSLog(@"Story end");
+            
+        }
+        else
+            if ([elementName isEqualToString:@"image"]) {
+                NSLog(@"image end");
+            }
+            else{
+                NSLog(@"%@",elementName);
+            }
     
     
 }

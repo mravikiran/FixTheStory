@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContainerViewController : UIViewController
+@interface ContainerViewController : UIViewController <NSXMLParserDelegate>
 - (void) setCurrentSubViewController:(UIViewController*) cvc;
 
 - (void) spewSomething;
