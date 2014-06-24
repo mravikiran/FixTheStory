@@ -129,8 +129,10 @@ static  NSString * const collectionViewKey = @"collectionView";
             
             self.selectedItemIndexPath= [self.collectionView indexPathForItemAtPoint:[gestureRecognizer locationInView:self.collectionView]];
             
+            
             if(self.selectedItemIndexPath!=nil){
                // NSLog(@"the current cell to be moved %ld and hte starting point is %f,%f",self.selectedItemIndexPath.row,_panStartPoint.x,_panStartPoint.y);
+                [self.collectionView bringSubviewToFront:[self.collectionView cellForItemAtIndexPath:self.selectedItemIndexPath]];
                 self.startMoving = true;
             }
            
@@ -254,6 +256,7 @@ static  NSString * const collectionViewKey = @"collectionView";
                 if(self.startMoving && [indexPath isEqual:self.selectedItemIndexPath]) {
                     
                 attributes.frame= CGRectMake(attributes.frame.origin.x+ self.panTranslationInCollectionView.x,attributes.frame.origin.y+ self.panTranslationInCollectionView.y,attributes.frame.size.width,attributes.frame.size.height);
+                   // attributes.zIndex=10;
                    // NSLog(@"%f,%f,%f,%f",attributes.frame.origin.x,attributes.frame.origin.y,attributes.frame.size.width,attributes.frame.size.height);
 
                 }
