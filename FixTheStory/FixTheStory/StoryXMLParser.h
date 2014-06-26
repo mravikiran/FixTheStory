@@ -7,10 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Level.h"
+#import "Story.h"
 
 @interface StoryXMLParser : NSXMLParser <NSXMLParserDelegate>
 
-@property ( atomic, strong) NSDictionary * stories;
+@property ( atomic, strong) NSMutableDictionary * storiesbyLevel;
+@property ( atomic, strong) NSMutableArray * stories;
+
+@property (atomic) Level * currentLevel;
+@property (atomic) Story * currentStory;
+@property (atomic) NSString * currentImage;
 
 
+@property (atomic) NSMutableString * element;
 @end

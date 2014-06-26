@@ -73,7 +73,9 @@
     StoryXMLParser * storyParser = [[StoryXMLParser alloc] initWithData:data];
     [storyParser setDelegate:storyParser];
     BOOL result = [storyParser parse];
-    
+    if(result){
+        NSLog(@"Successfully parsed");
+    }
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }

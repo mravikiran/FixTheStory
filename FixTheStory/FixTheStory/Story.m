@@ -10,4 +10,22 @@
 
 @implementation Story
 
+- (id) init
+{
+    self = [super init];
+    if (self) {
+        //custom initialization
+        self.partsOfStory = [[NSMutableArray alloc] init];
+    }
+
+    return self;
+}
+
+
+- (void) addPartOfStory:(NSString*)part
+{
+    //if([part length] != 0)
+        [self.partsOfStory addObject:part];
+}
+
 @end
