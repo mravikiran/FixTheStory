@@ -105,7 +105,7 @@ static  NSString * const collectionViewKey = @"collectionView";
                 if(!CGRectIsNull(intersectedRegion)){
                     if (intersectedRegion.size.width * intersectedRegion.size.height > areaOfUICollectionViewCell/4) {
                         self.toItemIndexPath = indexPath;
-                        NSLog(@"%ld",self.toItemIndexPath.row);
+                        //NSLog(@"%ld",self.toItemIndexPath.row);
                         break;
                     }
                 }
@@ -166,6 +166,10 @@ static  NSString * const collectionViewKey = @"collectionView";
                 NSLog(@"%ld",(long)uivcell.uid);
             }*/
             //[self invalidateLayout];
+            [[NSNotificationCenter defaultCenter]
+             postNotificationName:@"collectionViewRearrangementComplete"
+             object:self.collectionView];
+
 
             break;
         }

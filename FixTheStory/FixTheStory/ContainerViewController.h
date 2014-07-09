@@ -7,11 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FixedStoriesCounter.h"
+#import "StoryXMLParser.h"
+#import "Story.h"
+#import "StoryDispatchService.h"
 
-@interface ContainerViewController : UIViewController <NSXMLParserDelegate>
+@interface ContainerViewController : UIViewController 
+
+@property (atomic) StoryXMLParser * storyParser;
+@property (atomic) Story * currentStory;
+@property (atomic) FixedStoriesCounter * fixedStoryCounter;
+@property (atomic) StoryDispatchService * storyDispatchService;
+
 - (void) setCurrentSubViewController:(UIViewController*) cvc;
-
 - (void) spewSomething;
 - (void) showViewControllerWithName:(NSString*)vctype;
+
+- (Story*) getNextStory;
 
 @end

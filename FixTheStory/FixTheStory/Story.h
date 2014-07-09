@@ -10,6 +10,7 @@
 
 @interface Story : NSObject
 
+@property (nonatomic) NSInteger id;
 @property (nonatomic) NSInteger numberOfImages;
 @property (nonatomic) NSString * actualStory;
 @property (nonatomic) NSMutableArray * partsOfStory;

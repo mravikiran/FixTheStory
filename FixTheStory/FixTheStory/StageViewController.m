@@ -26,16 +26,27 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     }
     return self;
 }
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self) {
+        [self addObserver:self forKeyPath:@"parentViewController" options:NSKeyValueObservingOptionNew context:nil];
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
     
     [self.collectionView registerClass:[StagePhotoCell class]
             forCellWithReuseIdentifier:PhotoCellIdentifier];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(handleCollectionViewRearrangementComplete)
+                                                 name:@"collectionViewRearrangementComplete"
+                                               object:self.collectionView];
     
 
 }
@@ -61,6 +72,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
+    
     return 1;
 }
 
@@ -68,7 +80,9 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return 6;
+    if(self.story)
+        return self.story.numberOfImages;
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -78,11 +92,14 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier
                                               forIndexPath:indexPath];
     
-    NSString * imageName = [NSString stringWithFormat:@"img%ld.jpg",indexPath.row+1];
+    NSInteger randomPosition = [self getRandomLocation];
+    NSString * storyImageName = self.story.partsOfStory[randomPosition];
+    
+    NSString * imageName = [NSString stringWithFormat:@"img%@.png",storyImageName];
     
     photoCell.imageView.image = [UIImage imageNamed:imageName];
-    photoCell.uid = indexPath.row;
-    
+    //photoCell.uid = indexPath.row;
+    photoCell.uid = randomPosition;
     return photoCell;
 }
 
@@ -93,4 +110,58 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
         
     }
 }
+
+- (NSInteger) getRandomLocation
+{
+    
+    NSInteger size = [self.usedStoryLocationsArray count];
+    NSInteger randomNumber=0;
+    if(size>0){
+        NSInteger position = arc4random()%size;
+        randomNumber = [self.usedStoryLocationsArray[position] integerValue];
+        [self.usedStoryLocationsArray removeObjectAtIndex:position];
+    }
+    return randomNumber;
+}
+
+
+
+
+#pragma key observer methods
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"parentViewController"]) {
+        self.story = [(ContainerViewController*)self.parentViewController getNextStory];
+        if (self.story) {
+            self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:[self.story.partsOfStory count]];
+            for (int i=0; i<[self.story.partsOfStory count]; i++) {
+                self.usedStoryLocationsArray[i]=[NSNumber numberWithInt:i];
+            }
+        }
+    }
+}
+
+
+-(void) handleCollectionViewRearrangementComplete {
+
+    int matchedCells=0;
+    for(StagePhotoCell* cell in self.collectionView.visibleCells){
+        NSIndexPath * indexPath = [self.collectionView indexPathForCell:cell];
+        if(indexPath.row == cell.uid){
+            matchedCells++;
+        }
+        
+    }
+    if(matchedCells == self.story.numberOfImages)
+    {
+        NSLog(@"Hurrah puzzle solved");
+    }
+
+}
+
+- (void) spewSomething
+{
+    NSLog(@"This should spew Something");
+}
+
 @end

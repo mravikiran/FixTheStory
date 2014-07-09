@@ -11,7 +11,6 @@
 #import "RootViewController.h"
 #import "SettingsViewController.h"
 #import "RulesViewController.h"
-#import "StoryXMLParser.h"
 
 @interface ContainerViewController ()
 
@@ -61,6 +60,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.fixedStoryCounter = [[FixedStoriesCounter alloc] init];
     }
     return self;
 }
@@ -70,12 +70,26 @@
     NSString *path = [[NSBundle mainBundle] pathForResource:@"stories"
                                                      ofType:@"xml"];
     NSData *data = [NSData dataWithContentsOfFile:path];
-    StoryXMLParser * storyParser = [[StoryXMLParser alloc] initWithData:data];
-    [storyParser setDelegate:storyParser];
-    BOOL result = [storyParser parse];
+    self.storyParser = [[StoryXMLParser alloc] initWithData:data];
+    [self.storyParser setup];
+    [self.storyParser setDelegate:self.storyParser];
+    BOOL result = [self.storyParser parse];
     if(result){
         NSLog(@"Successfully parsed");
     }
+    
+    //update the stories completd so far array
+    //read from the file but for now just using a bogus array
+    NSMutableArray * newArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<10; i++) {
+        [newArray addObject:[NSNumber numberWithInt:0]];
+    }
+    [self.fixedStoryCounter updateCompletedStoriesByLevelArray:newArray];
+    
+    //initialize the story Dispatch service.
+    self.storyDispatchService =[[StoryDispatchService alloc] init];
+    
+    
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 }
@@ -140,7 +154,6 @@
     [self transitionFromViewController:currentSubViewController
                       toViewController:toVC duration:1.0 options:UIViewAnimationOptionCurveLinear animations:^{} completion:^(BOOL finished){
                           
-                          
                       }];
    [currentSubViewController removeFromParentViewController];
     [toVC didMoveToParentViewController:self];
@@ -151,58 +164,15 @@
 }
 
 
-#pragma xml parsing
+#pragma xml story parsing functions
 
-- (void)parser:(NSXMLParser *)parser
-didStartElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName
-    attributes:(NSDictionary *)attributeDict {
+
+- (Story*) getNextStory {
     
-    if ([elementName isEqualToString:@"level"]) {
-        NSLog(@"Level started");
-        
-    }
-    else
-        if ([elementName isEqualToString:@"story"]) {
-            NSLog(@"Story started");
-            
-        }
-        else
-            if ([elementName isEqualToString:@"image"]) {
-                NSLog(@"image started");
-            }
-            else{
-                NSLog(@"%@",elementName);
-            }
-    
-    
+    Story * story = [self.storyDispatchService getNextStoryFromParser:self.storyParser givenFixedStoriesCounter:self.fixedStoryCounter];
+    return story;
 }
 
-- (void)parser:(NSXMLParser *)parser
- didEndElement:(NSString *)elementName
-  namespaceURI:(NSString *)namespaceURI
- qualifiedName:(NSString *)qName {
-    
-    if ([elementName isEqualToString:@"level"]) {
-        NSLog(@"Level end");
-        
-    }
-    else
-        if ([elementName isEqualToString:@"story"]) {
-            NSLog(@"Story end");
-            
-        }
-        else
-            if ([elementName isEqualToString:@"image"]) {
-                NSLog(@"image end");
-            }
-            else{
-                NSLog(@"%@",elementName);
-            }
-    
-    
-}
 
 
 @end

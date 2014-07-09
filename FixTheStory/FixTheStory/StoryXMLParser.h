@@ -12,13 +12,23 @@
 
 @interface StoryXMLParser : NSXMLParser <NSXMLParserDelegate>
 
+
+
+
 @property ( atomic, strong) NSMutableDictionary * storiesbyLevel;
 @property ( atomic, strong) NSMutableArray * stories;
-
+@property ( atomic, strong) NSMutableArray * easyStories;
+@property ( atomic, strong) NSMutableArray * mediumStories;
 @property (atomic) Level * currentLevel;
 @property (atomic) Story * currentStory;
 @property (atomic) NSString * currentImage;
-
-
 @property (atomic) NSMutableString * element;
+
+
+
+-(void) setup;
+
+-(Story*) getStoryNumber:(NSInteger)storyNum fromLevel:(NSInteger)levelNum;
+-(NSArray*) getStoriesFromLevel:(NSInteger)level;// change the interface to the object Level
+
 @end
