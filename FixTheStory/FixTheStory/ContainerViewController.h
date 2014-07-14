@@ -16,6 +16,7 @@
 
 @property (atomic) StoryXMLParser * storyParser;
 @property (atomic) Story * currentStory;
+@property (atomic) Level * currentLevel;
 @property (atomic) FixedStoriesCounter * fixedStoryCounter;
 @property (atomic) StoryDispatchService * storyDispatchService;
 
@@ -24,5 +25,6 @@
 - (void) showViewControllerWithName:(NSString*)vctype;
 
 - (Story*) getNextStory;
+- (void)  updateLastFixedStoryCounter;
 
 @end

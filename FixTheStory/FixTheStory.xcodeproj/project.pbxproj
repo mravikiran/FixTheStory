@@ -23,6 +23,7 @@
 		0614777D195BA9ED00BF1DAB /* imgtwo.png in Resources */ = {isa = PBXBuildFile; fileRef = 06147773195BA9ED00BF1DAB /* imgtwo.png */; };
 		06147780195D35DE00BF1DAB /* StoryDispatchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0614777F195D35DE00BF1DAB /* StoryDispatchService.m */; };
 		06147786195F80FF00BF1DAB /* FixedStoriesCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06147785195F80FF00BF1DAB /* FixedStoriesCounter.m */; };
+		0614778919738D3B00BF1DAB /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0614778819738D3B00BF1DAB /* SuccessViewController.m */; };
 		068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */; };
 		06940D2418C177B4002C1A42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2318C177B4002C1A42 /* Foundation.framework */; };
 		06940D2618C177B4002C1A42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2518C177B4002C1A42 /* CoreGraphics.framework */; };
@@ -88,6 +89,8 @@
 		0614777F195D35DE00BF1DAB /* StoryDispatchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDispatchService.m; sourceTree = "<group>"; };
 		06147784195F80FF00BF1DAB /* FixedStoriesCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedStoriesCounter.h; sourceTree = "<group>"; };
 		06147785195F80FF00BF1DAB /* FixedStoriesCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedStoriesCounter.m; sourceTree = "<group>"; };
+		0614778719738D3B00BF1DAB /* SuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
+		0614778819738D3B00BF1DAB /* SuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
 		068B543D18E50CAF0096F16B /* FixTheStoryBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTheStoryBaseViewController.h; sourceTree = "<group>"; };
 		068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTheStoryBaseViewController.m; sourceTree = "<group>"; };
 		06940D2018C177B4002C1A42 /* FixTheStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FixTheStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,6 +271,8 @@
 				069AF07D18EA2D640045338E /* PlayViewController.m */,
 				069AF08218EB8B690045338E /* StageViewController.h */,
 				069AF08318EB8B690045338E /* StageViewController.m */,
+				0614778719738D3B00BF1DAB /* SuccessViewController.h */,
+				0614778819738D3B00BF1DAB /* SuccessViewController.m */,
 			);
 			path = FixTheStory;
 			sourceTree = "<group>";
@@ -469,6 +474,7 @@
 				06CA0A4018E3C4A600038824 /* ViewControllerFactory.m in Sources */,
 				06147786195F80FF00BF1DAB /* FixedStoriesCounter.m in Sources */,
 				069AF08B18EBB5510045338E /* StagePhotoCell.m in Sources */,
+				0614778919738D3B00BF1DAB /* SuccessViewController.m in Sources */,
 				060A8B761946BA58006A7B5A /* StoryXMLParser.m in Sources */,
 				06940D3018C177B4002C1A42 /* main.m in Sources */,
 				068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */,

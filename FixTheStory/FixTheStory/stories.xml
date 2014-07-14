@@ -8,7 +8,7 @@
         <image id="18" type="png">room</image>
         <actualStory>Elephant in the room</actualStory>
     </story>
-    <story id="100001" length="4">
+    <story id="100002" length="6">
         <image id="16" type="png">one</image>
         <image id="13" type="png">two</image>
         <image id="10" type="png">three</image>
@@ -17,7 +17,7 @@
         <image id="186" type="png">six</image>
         <actualStory>One two three four five six</actualStory>
     </story>
-    <story id="100003" length="4">
+    <story id="100003" length="6">
         <image id="16" type="png">one</image>
         <image id="13" type="png">two</image>
         <image id="10" type="png">three</image>
@@ -26,7 +26,7 @@
         <image id="186" type="png">six</image>
         <actualStory>One two three four five six</actualStory>
     </story>
-    <story id="100004" length="4">
+    <story id="100004" length="6">
         <image id="16" type="png">one</image>
         <image id="13" type="png">two</image>
         <image id="10" type="png">three</image>
@@ -35,7 +35,7 @@
         <image id="186" type="png">six</image>
         <actualStory>One two three four five six</actualStory>
     </story>
-    <story id="100005" length="4">
+    <story id="100005" length="6">
         <image id="16" type="png">one</image>
         <image id="13" type="png">two</image>
         <image id="10" type="png">three</image>
@@ -44,14 +44,14 @@
         <image id="186" type="png">six</image>
         <actualStory>One two three four five six</actualStory>
     </story>
-    <story id="200001" length="4">
+    <story id="100006" length="4">
         <image id="10" type="png">elephant</image>
         <image id="14" type="png">in</image>
         <image id="16" type="png">the</image>
         <image id="18" type="png">room</image>
         <actualStory>Elephant in the room</actualStory>
     </story>
-    <story id="200002" length="4">
+    <story id="100007" length="6">
         <image id="16" type="png">one</image>
         <image id="13" type="png">two</image>
         <image id="10" type="png">three</image>
@@ -60,7 +60,69 @@
         <image id="186" type="png">six</image>
         <actualStory>One two three four five six</actualStory>
     </story>
-    
+</level>
+
+
+<level number="2">
+    <story id="100001" length="4">
+        <image id="10" type="png">elephant</image>
+        <image id="14" type="png">in</image>
+        <image id="16" type="png">the</image>
+        <image id="18" type="png">room</image>
+        <actualStory>Elephant in the room</actualStory>
+    </story>
+    <story id="100002" length="6">
+        <image id="16" type="png">one</image>
+        <image id="13" type="png">two</image>
+        <image id="10" type="png">three</image>
+        <image id="18" type="png">four</image>
+        <image id="155" type="png">five</image>
+        <image id="186" type="png">six</image>
+        <actualStory>One two three four five six</actualStory>
+    </story>
+    <story id="100003" length="6">
+        <image id="16" type="png">one</image>
+        <image id="13" type="png">two</image>
+        <image id="10" type="png">three</image>
+        <image id="18" type="png">four</image>
+        <image id="155" type="png">five</image>
+        <image id="186" type="png">six</image>
+        <actualStory>One two three four five six</actualStory>
+    </story>
+    <story id="100004" length="6">
+        <image id="16" type="png">one</image>
+        <image id="13" type="png">two</image>
+        <image id="10" type="png">three</image>
+        <image id="18" type="png">four</image>
+        <image id="155" type="png">five</image>
+        <image id="186" type="png">six</image>
+        <actualStory>One two three four five six</actualStory>
+    </story>
+    <story id="100005" length="6">
+        <image id="16" type="png">one</image>
+        <image id="13" type="png">two</image>
+        <image id="10" type="png">three</image>
+        <image id="18" type="png">four</image>
+        <image id="155" type="png">five</image>
+        <image id="186" type="png">six</image>
+        <actualStory>One two three four five six</actualStory>
+    </story>
+    <story id="100006" length="6">
+        <image id="10" type="png">elephant</image>
+        <image id="14" type="png">in</image>
+        <image id="16" type="png">the</image>
+        <image id="18" type="png">room</image>
+        <actualStory>Elephant in the room</actualStory>
+    </story>
+    <story id="100007" length="6">
+        <image id="16" type="png">one</image>
+        <image id="13" type="png">two</image>
+        <image id="10" type="png">three</image>
+        <image id="18" type="png">four</image>
+        <image id="155" type="png">five</image>
+        <image id="186" type="png">six</image>
+        <actualStory>One two three four five six</actualStory>
+    </story>    
 </level>
 
 </stories>
