@@ -29,6 +29,7 @@
 -(void) setup;
 
 -(Story*) getStoryNumber:(NSInteger)storyNum fromLevel:(NSInteger)levelNum;
--(NSArray*) getStoriesFromLevel:(NSInteger)level;// change the interface to the object Level
+-(NSArray*) getStoriesFromLevel:(NSInteger)level;// change the interface to the object Level instead of NSInteger Level
+-(NSInteger) getNumberOfLevels;
 
 @end

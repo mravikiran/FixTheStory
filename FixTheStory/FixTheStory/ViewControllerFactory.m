@@ -40,6 +40,10 @@
         vc = [storyboard instantiateViewControllerWithIdentifier:@"StageViewController_ID" ];
         
     }
+    else if([vctype isEqualToString:@"success"])
+    {
+        vc = [storyboard instantiateViewControllerWithIdentifier:@"SuccessViewController_ID" ];
+    }
     
     return vc;
 }

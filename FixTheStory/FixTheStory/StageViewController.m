@@ -12,6 +12,8 @@
 
 static NSString * const PhotoCellIdentifier = @"PhotoCell";
 
+static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTheStory/story_images";
+
 @interface StageViewController ()
 
 @end
@@ -95,10 +97,20 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     NSInteger randomPosition = [self getRandomLocation];
     NSString * storyImageName = self.story.partsOfStory[randomPosition];
     
-    NSString * imageName = [NSString stringWithFormat:@"img%@.png",storyImageName];
+   // NSString * imageName = [NSString stringWithFormat:@"img%@.png",storyImageName];
     
-    photoCell.imageView.image = [UIImage imageNamed:imageName];
+    //photoCell.imageView.image = [UIImage imageNamed:imageName];
     //photoCell.uid = indexPath.row;
+    NSString * imagePath = [NSString stringWithFormat:@"%@/img%@.png",remoteImageFolder,storyImageName];
+
+    NSURL *url = [NSURL URLWithString:imagePath];
+    NSError * err;
+    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&err];
+    
+    //Error handle here
+    //Inform that either there is no internet or 4g or watever.
+    // Hence the need of imagefetcher is much ore evident. because stage view controller should not contain the logic of fetching the image.
+    photoCell.imageView.image = [[UIImage alloc] initWithData:data];
     photoCell.uid = randomPosition;
     return photoCell;
 }
@@ -142,6 +154,7 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 }
 
 
+//Todo : handle multiple solutions  to the puzzle.
 -(void) handleCollectionViewRearrangementComplete {
 
     int matchedCells=0;
@@ -155,6 +168,11 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
     if(matchedCells == self.story.numberOfImages)
     {
         NSLog(@"Hurrah puzzle solved");
+        [(ContainerViewController*)self.parentViewController updateLastFixedStoryCounter];
+        if ([self parentViewController]) {
+            [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"success"];
+            
+        }
     }
 
 }

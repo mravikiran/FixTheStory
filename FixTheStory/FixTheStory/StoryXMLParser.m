@@ -35,7 +35,6 @@
         NSLog(@"Level started");
         self.currentLevel = [[Level alloc] initWithNumber:[attributeDict[@"number"] integerValue]];
         
-        
     }
     else
         if ([elementName isEqualToString:@"story"]) {
@@ -85,7 +84,8 @@ self.element = [[NSMutableString
     if ([elementName isEqualToString:@"level"]) {
         NSLog(@"Level end");
         [self.storiesbyLevel setObject:self.stories forKey:self.currentLevel];
-        self.stories = nil;
+        self.stories=nil;
+        self.stories=[[NSMutableArray alloc] init];
         self.currentLevel=nil;
         
         
@@ -94,14 +94,7 @@ self.element = [[NSMutableString
     else
     if ([elementName isEqualToString:@"story"]) {
         NSLog(@"Story end");
-       // if(self.currentStory.id <200000) {
-       //     [self.easyStories addObject:self.currentStory];
-       // }
-       // else
-       // if(self.currentStory.id<300000)
-       // {
-       //     [self.mediumStories addObject:self.currentStory];
-       // }
+    
         [self.stories addObject:self.currentStory];
         self.currentStory=nil;
     }
@@ -153,6 +146,10 @@ self.element = [[NSMutableString
         }
     }
     return nil;
+}
+
+-(NSInteger) getNumberOfLevels {
+    return [self.storiesbyLevel count];
 }
 
 

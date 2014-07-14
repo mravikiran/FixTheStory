@@ -45,9 +45,18 @@
     return [self.completedStoriesByLevel count];
 }
 
-- (NSInteger) lastCompletedStoryForLevel:(NSInteger)level {
-    return [self.completedStoriesByLevel[level-1] integerValue];
+- (NSInteger) lastFixedStoryForLevel:(Level*)level {
+    return [self.completedStoriesByLevel[level.number-1] integerValue];
 }
+
+- (void) updateLastFixedStoryForLevel:(Level*)level toStory:(Story*) story{
+ 
+    if ([self.completedStoriesByLevel count] >= level.number) {
+        self.completedStoriesByLevel[level.number-1] = [NSNumber numberWithInteger:story.id];
+    }
+}
+
+
 
 
 

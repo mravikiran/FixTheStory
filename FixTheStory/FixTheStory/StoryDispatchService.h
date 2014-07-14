@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "StoryXMLParser.h"
 #import "Story.h"
+#import "Level.h"
 #import "FixedStoriesCounter.h"
 @interface StoryDispatchService : NSObject
 
 
-- (Story*) getNextStoryFromParser:(StoryXMLParser*)storyXMLParser givenFixedStoriesCounter:(FixedStoriesCounter*)fixedStoriesCounters;
+- (Story*) getNextStoryFromParser:(StoryXMLParser*)storyXMLParser givenFixedStoriesCounter:(FixedStoriesCounter*)fixedStoriesCounters updateLevel:(Level**)level;
 
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Story.h"
+#import "Level.h"
 
 @interface FixedStoriesCounter : NSObject
 
@@ -15,7 +17,9 @@
 -(id) initWithNumberOfLevels:(NSInteger)numberOfLevels;
 - (void) updateCompletedStoriesByLevelArray:(NSArray*) newArray;
 - (NSInteger) getNumberOfLevels;
-- (NSInteger) lastCompletedStoryForLevel:(NSInteger)level; //use Level instead of NSInteger
+- (NSInteger) lastFixedStoryForLevel:(Level*)level; //use Level instead of NSInteger
+
+- (void) updateLastFixedStoryForLevel:(Level*)level toStory:(Story*) story; //use Level instead of NSInteger
 
 
 @end
