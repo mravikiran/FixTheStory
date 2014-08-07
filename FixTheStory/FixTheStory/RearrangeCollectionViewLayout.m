@@ -58,12 +58,20 @@ static  NSString * const collectionViewKey = @"collectionView";
     return self;
 }
 
+- (void) dealloc{
+    [self removeObserver:self forKeyPath:collectionViewKey];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
+    
+
+}
+
 - (void)setup
 {
-    self.itemInsets = UIEdgeInsetsMake(22.0f, 22.0f, 22.0f, 22.0f);
+    self.itemInsets = UIEdgeInsetsMake(50.0f, 50.0f, 50.0f, 50.0f);
     self.itemSize = CGSizeMake(100.0f, 100.0f);
     self.interItemSpacingY = 20.0f;
-    self.interItemSpacingX = 10.0f;
+    self.interItemSpacingX = 20.0f;
+    //Depending on orientation decide the number of columns and hence eventually number of rows.
     self.numberOfColumns = 2;
 }
 
@@ -203,7 +211,7 @@ static  NSString * const collectionViewKey = @"collectionView";
           indexPath = [NSIndexPath indexPathForItem:item inSection:0];
                 UICollectionViewLayoutAttributes *itemAttributes =
             [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:indexPath];
-            itemAttributes.frame = [self frameForStagePhotoAtIndexPath:indexPath];
+        itemAttributes.frame = [self frameForStagePhotoAtIndexPath:indexPath withRows:itemCount/self.numberOfColumns];
         
         
             cellLayoutInfo[indexPath] = itemAttributes;
@@ -214,24 +222,22 @@ static  NSString * const collectionViewKey = @"collectionView";
     self.layoutInfo = cellLayoutInfo;
 }
 
-
-- (CGRect) frameForStagePhotoAtIndexPath:(NSIndexPath*) indexPath {
+- (CGRect) frameForStagePhotoAtIndexPath:(NSIndexPath*) indexPath withRows:(NSInteger)numberOfRows {
     NSInteger row = (indexPath.row / self.numberOfColumns);
     NSInteger column = indexPath.row % self.numberOfColumns;
+   
     
-    CGFloat spacingX = self.collectionView.bounds.size.width -
-    self.itemInsets.left -
-    self.itemInsets.right -
-    (self.numberOfColumns * self.itemSize.width);
+    CGFloat topMargin = (self.collectionView.bounds.size.height -
+                           numberOfRows*self.itemSize.height -
+                          (numberOfRows-1)*self.interItemSpacingY)/2;
+    CGFloat leftMargin =(self.collectionView.bounds.size.width -
+                           self.numberOfColumns*self.itemSize.width -
+                          (self.numberOfColumns-1)*self.interItemSpacingX)/2;
     
-   // if (self.numberOfColumns > 1) spacingX = spacingX / (self.numberOfColumns - 1);
-    if (self.numberOfColumns > 1) spacingX = spacingX / self.numberOfColumns;
-    
-    //CGFloat originX = floorf(self.itemInsets.left + (self.itemSize.width + spacingX) * column);
-    CGFloat originX = floorf((self.itemSize.width + spacingX) * column+(spacingX/2) +self.itemInsets.left );
 
-    //CGFloat originY = floor(self.itemInsets.top +
-    CGFloat originY = floor(self.itemInsets.top + (self.itemSize.height + self.interItemSpacingY) * row);
+    CGFloat originX = floorf((self.itemSize.width + self.interItemSpacingX) * column+leftMargin);
+
+    CGFloat originY = floor((self.itemSize.height + self.interItemSpacingY) * row + topMargin);
     
     return CGRectMake(originX, originY, self.itemSize.width, self.itemSize.height);
 }
@@ -281,7 +287,7 @@ static  NSString * const collectionViewKey = @"collectionView";
     rowCount * self.itemSize.height + (rowCount - 1) * self.interItemSpacingY +
     self.itemInsets.bottom;
     
-    return CGSizeMake(self.collectionView.bounds.size.width, height);
+    return CGSizeMake(self.collectionView.bounds.size.width,self.collectionView.bounds.size.height);// height);
 }
 
 #pragma mark - Key-Value Observing methods

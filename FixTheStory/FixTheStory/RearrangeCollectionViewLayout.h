@@ -15,6 +15,8 @@
 @property (nonatomic) CGFloat interItemSpacingY;
 @property (nonatomic) CGFloat interItemSpacingX;
 @property (nonatomic) NSInteger numberOfColumns;
+@property (nonatomic) CGFloat leftMargin;
+@property (nonatomic) CGFloat topMargin;
 
 @property (nonatomic, strong) NSDictionary *layoutInfo;
 

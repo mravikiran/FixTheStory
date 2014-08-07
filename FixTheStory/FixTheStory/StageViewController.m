@@ -53,6 +53,11 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
 
 }
 
+- (void) dealloc {
+    [self removeObserver:self forKeyPath:@"parentViewController"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"collectionViewRearrangementComplete" object:self.collectionView];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
