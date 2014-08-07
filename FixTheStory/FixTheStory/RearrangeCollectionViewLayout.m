@@ -250,6 +250,23 @@ static  NSString * const collectionViewKey = @"collectionView";
 
 
 
+- (void)AdjustAttributesFrameBasedOnPanTranslation:(UICollectionViewLayoutAttributes *)attributes
+{
+    CGFloat originX = attributes.frame.origin.x+ self.panTranslationInCollectionView.x;
+    CGFloat originY = attributes.frame.origin.y+ self.panTranslationInCollectionView.y;
+    CGFloat width = attributes.frame.size.width;
+    CGFloat height = attributes.frame.size.height;
+    
+    if(originX < 0) originX =0;
+    if(originY < 0) originY =0;
+    if(originX + width > self.collectionView.bounds.size.width) originX = self.collectionView.bounds.size.width - width;
+    
+    if(originY + height > self.collectionView.bounds.size.height) originY = self.collectionView.bounds.size.height - height;
+    
+    
+    attributes.frame = CGRectMake(originX, originY, width, height);
+}
+
 - (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect
 {
     NSMutableArray *allAttributes = [NSMutableArray arrayWithCapacity:self.layoutInfo.count];
@@ -265,10 +282,9 @@ static  NSString * const collectionViewKey = @"collectionView";
             if (CGRectIntersectsRect(rect, attributes.frame)) {
                 if(self.startMoving && [indexPath isEqual:self.selectedItemIndexPath]) {
                     
-                attributes.frame= CGRectMake(attributes.frame.origin.x+ self.panTranslationInCollectionView.x,attributes.frame.origin.y+ self.panTranslationInCollectionView.y,attributes.frame.size.width,attributes.frame.size.height);
-                   // attributes.zIndex=10;
-                   // NSLog(@"%f,%f,%f,%f",attributes.frame.origin.x,attributes.frame.origin.y,attributes.frame.size.width,attributes.frame.size.height);
-
+                    [self AdjustAttributesFrameBasedOnPanTranslation:attributes];
+                    
+                    
                 }
                 [allAttributes addObject:attributes];
             }
