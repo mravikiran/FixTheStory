@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *settingsButton;
 @property (weak, nonatomic) IBOutlet UIButton *rulesButton;
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIView *subContainer;
 - (IBAction)onSettings:(id)sender;
 - (IBAction)onRules:(id)sender;
 - (IBAction)onPlay:(id)sender;

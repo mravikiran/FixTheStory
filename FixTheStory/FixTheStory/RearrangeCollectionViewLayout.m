@@ -257,11 +257,16 @@ static  NSString * const collectionViewKey = @"collectionView";
     CGFloat width = attributes.frame.size.width;
     CGFloat height = attributes.frame.size.height;
     
+    
+    // prevent the images from being dragged out of the collection view.
     if(originX < 0) originX =0;
     if(originY < 0) originY =0;
-    if(originX + width > self.collectionView.bounds.size.width) originX = self.collectionView.bounds.size.width - width;
-    
-    if(originY + height > self.collectionView.bounds.size.height) originY = self.collectionView.bounds.size.height - height;
+    if(originX + width > self.collectionView.bounds.size.width) {
+        originX = self.collectionView.bounds.size.width - width;
+    }
+    if(originY + height > self.collectionView.bounds.size.height) {
+        originY = self.collectionView.bounds.size.height - height;
+    }
     
     
     attributes.frame = CGRectMake(originX, originY, width, height);

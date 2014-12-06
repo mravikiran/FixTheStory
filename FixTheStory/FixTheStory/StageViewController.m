@@ -25,7 +25,7 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-    }
+       }
     return self;
 }
 - (instancetype)initWithCoder:(NSCoder *)coder
@@ -33,6 +33,9 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     self = [super initWithCoder:coder];
     if (self) {
         [self addObserver:self forKeyPath:@"parentViewController" options:NSKeyValueObservingOptionNew context:nil];
+        
+        
+
     }
     return self;
 }
@@ -50,7 +53,29 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
                                                  name:@"collectionViewRearrangementComplete"
                                                object:self.collectionView];
     
+    //hide the layover view controller up above
+    
+    CGRect buttonRect = self.levelButton.frame;
+    CGRect frame = CGRectMake(0, (buttonRect.origin.y - self.levelContainer.frame.size.height), self.levelContainer.frame.size.width, self.levelContainer.frame.size.height);
+    
+    self.levelContainer.frame = frame;
+  //  NSLog([NSString stringWithFormat:@"The coordinates are %f,%f",self.levelContainer.frame.origin.x,self.levelContainer.frame.origin.y]);
+  //  NSLog([NSString stringWithFormat:@"The center coordinates are %f,%f",self.levelContainer.center.x,self.levelContainer.center.y]);
+    
+    //setting up touch gesture recognizer for the super view
+    self.tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnParentView:)];
+    self.tapGestureRecognizer.delegate = self;
+    [self.view addGestureRecognizer:self.tapGestureRecognizer];
+    
+    
 
+}
+
+- (void) handleTapOnParentView:(UITapGestureRecognizer *)tapRecognizer
+{
+    if (self.levelContainer.frame.origin.y > 0) {
+        [self ToggleHiddenStateWithAnimation];
+    }
 }
 
 - (void) dealloc {
@@ -182,9 +207,58 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
 
 }
 
+- (void)ToggleHiddenStateWithAnimation {
+
+    if (self.levelContainer.frame.origin.y < 0) {
+        
+    [self.collectionView removeGestureRecognizer:self.collectionViewLayout.panGestureRecognizer];
+        
+    [UIView animateWithDuration:1.0
+                          delay: 0.0
+                        options: UIViewAnimationOptionTransitionCrossDissolve
+                     animations:^{
+//                         self.levelContainer.alpha = 0.0;
+                         CGFloat levelContainerNewX=0;
+                         CGFloat levelContainerNewY = self.levelButton.frame.origin.y + self.levelButton.frame.size.height;
+                         
+                         self.levelContainer.frame = CGRectMake(levelContainerNewX, levelContainerNewY, self.levelContainer.frame.size.width, self.levelContainer.frame.size.height);
+                       
+                         
+                     }
+                     completion:^(BOOL finished){
+                         // Wait one second and then fade in the view
+                         
+                     }];
+    }
+    else
+    {
+    [self.collectionView addGestureRecognizer:self.collectionViewLayout.panGestureRecognizer];
+
+        self.levelContainer.frame = CGRectMake(0 , (self.levelButton.frame.origin.y - self.levelContainer.frame.size.height), self.levelContainer.frame.size.width, self.levelContainer.frame.size.height);
+    }
+}
+
+- (IBAction)onLevelButton:(id)sender {
+    //hide other container views and then
+    [self ToggleHiddenStateWithAnimation];
+}
+
 - (void) spewSomething
 {
     NSLog(@"This should spew Something");
+}
+
+#pragma UIGestureRecognizerDelegate
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+    // Determine if the touch is inside the custom subview
+    if ([touch view] == self.levelContainer.subviews[0]){
+        //An important point to notice is that levelcontainer has a subview and inside those subviews we have buttons etc.
+        // If it is, prevent all of the delegate's gesture recognizers
+        // from receiving the touch
+        return NO;
+    }
+    return YES;
 }
 
 @end

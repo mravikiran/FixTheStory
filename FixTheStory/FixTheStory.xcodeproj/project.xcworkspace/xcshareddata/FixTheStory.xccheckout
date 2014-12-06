@@ -10,29 +10,29 @@
 	<string>FixTheStory</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>5F4820F2-F824-4AC9-9164-51BC248B433D</key>
+		<key>31FED601297CD75DDF8865A6A3F4FFF4E2174F28</key>
 		<string>https://github.com/mravikiran/FixTheStory.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>FixTheStory/FixTheStory.xcodeproj/project.xcworkspace</string>
+	<string>FixTheStory/FixTheStory.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>5F4820F2-F824-4AC9-9164-51BC248B433D</key>
+		<key>31FED601297CD75DDF8865A6A3F4FFF4E2174F28</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/mravikiran/FixTheStory.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>5F4820F2-F824-4AC9-9164-51BC248B433D</string>
+	<string>31FED601297CD75DDF8865A6A3F4FFF4E2174F28</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>5F4820F2-F824-4AC9-9164-51BC248B433D</string>
+			<string>31FED601297CD75DDF8865A6A3F4FFF4E2174F28</string>
 			<key>IDESourceControlWCCName</key>
 			<string>FixTheStory</string>
 		</dict>
