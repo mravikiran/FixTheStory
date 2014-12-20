@@ -34,7 +34,6 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     if (self) {
         [self addObserver:self forKeyPath:@"parentViewController" options:NSKeyValueObservingOptionNew context:nil];
         
-        
 
     }
     return self;
@@ -172,7 +171,8 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
 #pragma key observer methods
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    if ([keyPath isEqualToString:@"parentViewController"]) {
+    if ([keyPath isEqualToString:@"parentViewController"])
+    {
         self.story = [(ContainerViewController*)self.parentViewController getNextStory];
         if (self.story) {
             self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:[self.story.partsOfStory count]];

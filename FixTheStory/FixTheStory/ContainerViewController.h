@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FixedStoriesCounter.h"
-#import "StoryXMLParser.h"
+#import "StoryParser.h"
 #import "Story.h"
 #import "StoryDispatchService.h"
 

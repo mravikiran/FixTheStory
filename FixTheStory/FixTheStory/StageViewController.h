@@ -33,7 +33,7 @@
 
 - (void) handleTapOnParentView:(UITapGestureRecognizer*)tapRecognizer;
 - (void) spewSomething;
--(void) handleCollectionViewRearrangementComplete;
--(NSInteger) getRandomLocation;
+- (void) handleCollectionViewRearrangementComplete;
+- (NSInteger) getRandomLocation;
 
 @end
