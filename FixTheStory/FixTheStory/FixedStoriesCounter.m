@@ -51,7 +51,7 @@
 
 - (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story{
  
-    if ([self.completedStoriesByLevel count] >= level.number) {
+    if ([self.completedStoriesByLevel count] >= level.number && level.number > 0) {
         NSInteger storyId = story? story.id : 0;
         self.completedStoriesByLevel[level.number-1] = [NSNumber numberWithInteger:storyId];
     }
