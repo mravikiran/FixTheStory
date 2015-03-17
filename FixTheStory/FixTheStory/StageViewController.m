@@ -14,6 +14,8 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 
 static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTheStory/story_images";
 
+const NSInteger ridiculouslyHighStoryId = 100000;
+
 @interface StageViewController ()
 
 @end
@@ -44,6 +46,8 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
+    self.goBackToMain.hidden = true;
+
     
     [self.collectionView registerClass:[StagePhotoCell class]
             forCellWithReuseIdentifier:PhotoCellIdentifier];
@@ -174,12 +178,21 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     if ([keyPath isEqualToString:@"parentViewController"])
     {
         self.story = [(ContainerViewController*)self.parentViewController getNextStory];
-        if (self.story) {
-            self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:[self.story.partsOfStory count]];
-            for (int i=0; i<[self.story.partsOfStory count]; i++) {
-                self.usedStoryLocationsArray[i]=[NSNumber numberWithInt:i];
-            }
+        if (!self.story) {
+            Story * endStory = [[Story alloc] init];
+            endStory.id = ridiculouslyHighStoryId;
+            endStory.numberOfImages = 4;
+            [endStory addPartOfStory:@"carry"];
+            [endStory addPartOfStory:@"mila"];
+            [endStory addPartOfStory:@"natalie"];
+            [endStory addPartOfStory:@"scarlette"];
+            self.story = endStory;
         }
+    
+    self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:[self.story.partsOfStory count]];
+    for (int i=0; i<[self.story.partsOfStory count]; i++) {
+        self.usedStoryLocationsArray[i]=[NSNumber numberWithInt:i];
+    }
     }
 }
 
@@ -199,9 +212,13 @@ static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTh
     {
         NSLog(@"Hurrah puzzle solved");
         [(ContainerViewController*)self.parentViewController updateLastFixedStoryCounter];
-        if ([self parentViewController]) {
+        if ([self parentViewController] && self.story.id != ridiculouslyHighStoryId) {
             [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"success"];
             
+        }
+        else
+        {
+            self.goBackToMain.hidden = false;
         }
     }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="o8b-gH-kN8">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="o8b-gH-kN8">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -276,6 +276,16 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LEl-pk-aWK">
+                                <rect key="frame" x="25" y="450" width="270" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Well Done !! Go Back To Main Page">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onMain:" destination="deD-Gy-uTo" eventType="touchUpInside" id="sEU-aS-CUp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -283,6 +293,7 @@
                         <outlet property="buttonHolderView" destination="lj1-Iz-AWE" id="Gx3-3N-PuZ"/>
                         <outlet property="collectionView" destination="Rf6-xU-KKE" id="BId-M7-jsz"/>
                         <outlet property="collectionViewLayout" destination="GLu-jy-DeG" id="hZL-J7-0E7"/>
+                        <outlet property="goBackToMain" destination="LEl-pk-aWK" id="yOA-q3-vgc"/>
                         <outlet property="levelButton" destination="0wA-ud-7IF" id="eSI-dJ-2wu"/>
                         <outlet property="levelContainer" destination="rgC-Hq-cqz" id="VON-5D-AdA"/>
                         <outlet property="mainButton" destination="E64-Yb-ixz" id="lAB-DV-XXT"/>

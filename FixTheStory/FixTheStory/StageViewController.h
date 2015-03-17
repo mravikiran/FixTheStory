@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet RearrangeCollectionViewLayout *collectionViewLayout;
 
 @property (strong, nonatomic) UITapGestureRecognizer * tapGestureRecognizer;
+@property (weak, nonatomic) IBOutlet UIButton *goBackToMain;
 
 - (IBAction)onLevelButton:(id)sender;
 

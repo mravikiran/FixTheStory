@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "FixedStoriesCounter.h"
-#import "StoryParser.h"
+#import "StoryXMLParser.h"
+#import "StoryJSONParser.h"
 #import "Story.h"
 #import "StoryDispatchService.h"
 
 @interface ContainerViewController : UIViewController 
 
-@property (atomic) StoryXMLParser * storyParser;
+@property (atomic) StoryParser * storyXMLParser;
+@property (atomic) StoryParser * storyJSONParser;
 @property (atomic) Story * currentStory;
 @property (atomic) Level * currentLevel;
 @property (atomic) FixedStoriesCounter * fixedStoryCounter;
@@ -26,5 +28,7 @@
 
 - (Story*) getNextStory;
 - (void)  updateLastFixedStoryCounter;
+- (NSMutableArray*) getUsedStoriesMapFromStoryParser;
+- (void) updateFixedStoriesCounter:(NSMutableArray*)previouslyAvailableFixedStories;
 
 @end

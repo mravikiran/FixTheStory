@@ -31,7 +31,7 @@
     
 }
 
-- (void) updateCompletedStoriesByLevelArray:(NSArray*) newArray{
+- (void) UpdateCompletedStoriesByLevelArray:(NSArray*) newArray{
     [self.completedStoriesByLevel removeAllObjects];
     
     for( id object in newArray){
@@ -41,18 +41,19 @@
     
 }
 
-- ( NSInteger) getNumberOfLevels {
+- ( NSInteger) GetNumberOfLevels {
     return [self.completedStoriesByLevel count];
 }
 
-- (NSInteger) lastFixedStoryForLevel:(Level*)level {
+- (NSInteger) LastFixedStoryForLevel:(Level*)level {
     return [self.completedStoriesByLevel[level.number-1] integerValue];
 }
 
-- (void) updateLastFixedStoryForLevel:(Level*)level toStory:(Story*) story{
+- (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story{
  
     if ([self.completedStoriesByLevel count] >= level.number) {
-        self.completedStoriesByLevel[level.number-1] = [NSNumber numberWithInteger:story.id];
+        NSInteger storyId = story? story.id : 0;
+        self.completedStoriesByLevel[level.number-1] = [NSNumber numberWithInteger:storyId];
     }
 }
 

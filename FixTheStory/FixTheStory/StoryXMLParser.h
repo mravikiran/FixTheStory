@@ -9,13 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "Level.h"
 #import "Story.h"
+#import "StoryParser.h"
 
-@interface StoryXMLParser : NSXMLParser <NSXMLParserDelegate>
+@interface StoryXMLParser : StoryParser <NSXMLParserDelegate>
 
 
 
 
-@property ( atomic, strong) NSMutableDictionary * storiesbyLevel;
+//@property ( atomic, strong) NSMutableDictionary * storiesbyLevel;
 @property ( atomic, strong) NSMutableArray * stories;
 @property ( atomic, strong) NSMutableArray * easyStories;
 @property ( atomic, strong) NSMutableArray * mediumStories;
@@ -23,13 +24,10 @@
 @property (atomic) Story * currentStory;
 @property (atomic) NSString * currentImage;
 @property (atomic) NSMutableString * element;
+@property (atomic) NSXMLParser * xmlParser;
 
 
 
--(void) setup;
 
--(Story*) getStoryNumber:(NSInteger)storyNum fromLevel:(NSInteger)levelNum;
--(NSArray*) getStoriesFromLevel:(NSInteger)level;// change the interface to the object Level instead of NSInteger Level
--(NSInteger) getNumberOfLevels;
 
 @end

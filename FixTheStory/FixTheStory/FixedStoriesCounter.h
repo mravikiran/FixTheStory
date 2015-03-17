@@ -15,11 +15,11 @@
 @property ( atomic) NSMutableArray * completedStoriesByLevel;
 
 -(id) initWithNumberOfLevels:(NSInteger)numberOfLevels;
-- (void) updateCompletedStoriesByLevelArray:(NSArray*) newArray;
-- (NSInteger) getNumberOfLevels;
-- (NSInteger) lastFixedStoryForLevel:(Level*)level; //use Level instead of NSInteger
+- (void) UpdateCompletedStoriesByLevelArray:(NSArray*) newArray;
+- (NSInteger) GetNumberOfLevels;
+- (NSInteger) LastFixedStoryForLevel:(Level*)level; //use Level instead of NSInteger
 
-- (void) updateLastFixedStoryForLevel:(Level*)level toStory:(Story*) story; //use Level instead of NSInteger
+- (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story; //use Level instead of NSInteger
 
 
 @end

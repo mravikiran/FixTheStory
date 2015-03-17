@@ -67,25 +67,26 @@
 
 - (void)viewDidLoad
 {
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"stories"
+    NSMutableArray * usedStoriesMap = [self getUsedStoriesMapFromStoryParser];
+    NSString *xmlDataPath = [[NSBundle mainBundle] pathForResource:@"stories"
                                                      ofType:@"xml"];
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    self.storyParser = [[StoryXMLParser alloc] initWithData:data];
-    [self.storyParser setup];
-    [self.storyParser setDelegate:self.storyParser];
-    BOOL result = [self.storyParser parse];
-    if(result){
-        NSLog(@"Successfully parsed");
-    }
+    
+    self.storyXMLParser = [[StoryXMLParser alloc] init];
+    [self.storyXMLParser LoadStoriesFromUrl:xmlDataPath];
+    
+    NSString *webServicePath = [NSString stringWithFormat:@"http://localhost:8080/getallstories"];
+    self.storyJSONParser = [[StoryJSONParser alloc] init];
+    [self.storyJSONParser LoadStoriesFromUrl:webServicePath];
+    
     
     //update the stories completd so far array
     //read from the file but for now just using a bogus array
     NSMutableArray * newArray = [[NSMutableArray alloc] init];
-    NSInteger numberOfLevels = [self.storyParser getNumberOfLevels];
+    NSInteger numberOfLevels = [self.storyXMLParser GetNumberOfLevels];
     for (int i=0; i<numberOfLevels; i++) {
         [newArray addObject:[NSNumber numberWithInt:0]];
     }
-    [self.fixedStoryCounter updateCompletedStoriesByLevelArray:newArray];
+    [self.fixedStoryCounter UpdateCompletedStoriesByLevelArray:newArray];
     
     //initialize the story Dispatch service.
     self.storyDispatchService =[[StoryDispatchService alloc] init];
@@ -165,13 +166,67 @@
 }
 
 
+- (NSMutableArray*) getUsedStoriesMapFromStoryParser
+{
+    NSMutableArray *availableFixedStories = [[NSMutableArray alloc] init];
+    NSMutableDictionary * storiesByLevel = self.storyXMLParser.storiesByLevel;
+    NSArray * stories;
+    for(Level *key in storiesByLevel)
+    {
+        stories = storiesByLevel[key];
+        NSInteger storyId = [self.fixedStoryCounter LastFixedStoryForLevel:key];
+        for(Story * story in stories)
+        {
+            if (story.id <= storyId) {
+                [availableFixedStories addObject: [NSNumber numberWithLong:story.id]];
+            }
+        }
+    }
+    return availableFixedStories;
+}
+
+- (BOOL) findStoryIn:(NSMutableArray*) previouslyAvailableFixedStories withStoryId:(NSInteger)storyId
+{
+    for (NSNumber * availableId in previouslyAvailableFixedStories) {
+        if([availableId integerValue] == storyId)
+            return true;
+    }
+    return false;
+}
+
+- (void) updateFixedStoriesCounter:(NSMutableArray*)previouslyAvailableFixedStories
+{
+    NSMutableDictionary * storiesByLevel = self.storyXMLParser.storiesByLevel;
+    NSArray * stories;
+    for(Level *key in storiesByLevel)
+    {
+        //Are the stories sorted??
+        [self.fixedStoryCounter UpdateLastFixedStoryForLevel:key ToStory:NULL];
+        stories = storiesByLevel[key];
+        NSUInteger numberOfStories = [stories count];
+        for (unsigned int i = 0; i < numberOfStories; i++)
+        {
+            Story * story = stories[i];
+            if(![self findStoryIn:previouslyAvailableFixedStories withStoryId : story.id] && i > 0)
+            {
+                Story * previousStory = stories[i-1];
+                [self.fixedStoryCounter UpdateLastFixedStoryForLevel:key ToStory:previousStory];
+                break;
+            }
+            //an if flag probably??
+            [self.fixedStoryCounter UpdateLastFixedStoryForLevel:key ToStory:story];
+        }
+    }
+
+}
+
 #pragma xml story parsing functions
 
 
 - (Story*) getNextStory {
     
     Level * level = [[Level alloc] init];
-    Story * story = [self.storyDispatchService getNextStoryFromParser:self.storyParser givenFixedStoriesCounter:self.fixedStoryCounter updateLevel:&level];
+    Story * story = [self.storyDispatchService getNextStoryFromParser:self.storyXMLParser givenFixedStoriesCounter:self.fixedStoryCounter updateLevel:&level];
     self.currentStory = story;
     self.currentLevel = level;
     
@@ -179,7 +234,7 @@
 }
 
 -(void) updateLastFixedStoryCounter{
-    [self.fixedStoryCounter updateLastFixedStoryForLevel:self.currentLevel toStory:self.currentStory ];
+    [self.fixedStoryCounter UpdateLastFixedStoryForLevel:self.currentLevel ToStory:self.currentStory ];
 }
 
 

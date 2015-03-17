@@ -16,7 +16,7 @@
     self.easyStories = [[NSMutableArray alloc] init];
     self.mediumStories = [[NSMutableArray alloc] init];
     self.stories = [[NSMutableArray alloc] init];
-    self.storiesbyLevel =[[NSMutableDictionary alloc] init];
+    self.storiesByLevel =[[NSMutableDictionary alloc] init];
 }
 
 
@@ -28,17 +28,17 @@
         attributes:(NSDictionary *)attributeDict {
     
     if ([elementName isEqualToString:@"stories"]) {
-        NSLog(@"Found the root element");
+       // NSLog(@"Found the root element");
     }
     else
     if ([elementName isEqualToString:@"level"]) {
-        NSLog(@"Level started");
+       // NSLog(@"Level started");
         self.currentLevel = [[Level alloc] initWithNumber:[attributeDict[@"number"] integerValue]];
         
     }
     else
         if ([elementName isEqualToString:@"story"]) {
-            NSLog(@"Story started");
+         //   NSLog(@"Story started");
             self.currentStory = [[Story alloc] init];
             self.currentStory.numberOfImages = [attributeDict[@"length"] integerValue];
             self.currentStory.id = [attributeDict[@"id"] integerValue];
@@ -46,18 +46,18 @@
         else
             if ([elementName isEqualToString:@"image"]) {
                 self.element=nil;
-                NSLog(@"image started");
+           //     NSLog(@"image started");
                 
             }
             else
                 if ([elementName isEqualToString:@"actualStory"]) {
                     self.element=nil;
-                    NSLog(@"actual story started");
+             //       NSLog(@"actual story started");
                     
                 }
                 else
                 {
-                    NSLog(@"%@",elementName);
+               //     NSLog(@"%@",elementName);
                 }
 
     
@@ -72,7 +72,7 @@ self.element = [[NSMutableString
             alloc] init];
 
 [self.element appendString:string];
-    NSLog(@"Found characters %@",self.element);
+//    NSLog(@"Found characters %@",self.element);
 
 }
 
@@ -82,8 +82,8 @@ self.element = [[NSMutableString
         qualifiedName:(NSString *)qName {
     
     if ([elementName isEqualToString:@"level"]) {
-        NSLog(@"Level end");
-        [self.storiesbyLevel setObject:self.stories forKey:self.currentLevel];
+  //      NSLog(@"Level end");
+        [self.storiesByLevel setObject:self.stories forKey:self.currentLevel];
         self.stories=nil;
         self.stories=[[NSMutableArray alloc] init];
         self.currentLevel=nil;
@@ -93,14 +93,14 @@ self.element = [[NSMutableString
     }
     else
     if ([elementName isEqualToString:@"story"]) {
-        NSLog(@"Story end");
+    //    NSLog(@"Story end");
     
         [self.stories addObject:self.currentStory];
         self.currentStory=nil;
     }
     else
         if ([elementName isEqualToString:@"image"]) {
-            NSLog(@"image end");
+      //      NSLog(@"image end");
             self.currentImage=self.element;
             [self.currentStory addPartOfStory:self.currentImage];
             self.element=nil;
@@ -108,26 +108,40 @@ self.element = [[NSMutableString
     }
     else
     if ([elementName isEqualToString:@"actualStory"]) {
-        NSLog(@"actual story end");
+        //NSLog(@"actual story end");
         self.currentStory.actualStory = self.element;
         self.element=nil;
     }
 
     else{
-        NSLog(@"%@",elementName);
+   //     NSLog(@"%@",elementName);
     }
     
     
 }
 
--(Story*) getStoryNumber:(NSInteger)storyNum fromLevel:(NSInteger)levelNum
+#pragma baseclass functions
+-(void) LoadStoriesFromUrl:(NSString*)dataPath;
+{
+    NSData *data = [NSData dataWithContentsOfFile:dataPath];
+    self.xmlParser= [[NSXMLParser alloc] initWithData:data];
+    [self setup];
+    [self.xmlParser setDelegate:self];
+    BOOL result = [self.xmlParser parse];
+    if(result){
+        NSLog(@"Successfully parsed");
+    }
+}
+
+
+-(Story*) GetStoryNumber:(NSInteger)storyNum FromLevel:(NSInteger)levelNum
 {
     NSArray * stories;
-    for(Level *key in self.storiesbyLevel)
+    for(Level *key in self.storiesByLevel)
     {
         if (key.number == levelNum) {
             
-            stories = self.storiesbyLevel[key];
+            stories = self.storiesByLevel[key];
             break;
         }
     }
@@ -138,18 +152,19 @@ self.element = [[NSMutableString
     
 }
 
--(NSArray*) getStoriesFromLevel:(NSInteger)level { // change the interface to the object Level
+-(NSArray*) GetStoriesFromLevel:(NSInteger)level { // change the interface to the object Level
     
-    for (Level * key  in self.storiesbyLevel) {
+    for (Level * key  in self.storiesByLevel) {
         if (key.number == level) {
-            return self.storiesbyLevel[key];
+            return self.storiesByLevel[key];
         }
     }
     return nil;
 }
 
--(NSInteger) getNumberOfLevels {
-    return [self.storiesbyLevel count];
+-(NSInteger)
+GetNumberOfLevels {
+    return [self.storiesByLevel count];
 }
 
 
