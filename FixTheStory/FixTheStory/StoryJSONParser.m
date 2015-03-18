@@ -11,13 +11,6 @@
 @implementation StoryJSONParser
 
 
-
--(Story*) GetStoryByLevel:(Level*)level Id:(NSInteger)storyId
-{
-    //dummy implementation
-    return NULL;
-}
-
 -(id) init
 {
     self = [super init];
@@ -67,7 +60,6 @@
     NSArray * stories = storiesAsJson[@"stories"];
     for(NSDictionary* storyDictionary in stories)
     {
-//        NSDictionary * storyWithKeys = [NSJSONSerialization JSONObjectWithData:story options:0 error:NULL];
         NSLog([NSString stringWithFormat:@"Number of fields %lu", (unsigned long)[storyDictionary count]]);
         NSLog(@"just for breaking");
         
@@ -86,9 +78,6 @@
 
 -(void) LoadStoriesFromUrl:(NSString*)dataPath
 {
-    //dummy base class implementations
-    //needs to be overridden by the concrete classes
-    
     NSURL* url = [NSURL URLWithString:dataPath];
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     
@@ -109,33 +98,10 @@
     ];
 
 }
--(NSInteger) GetNumberOfLevels
-{
-    
-    //dummy base class implementations
-    //needs to be overridden by the concrete classes
-    
-    return 0;
-}
+
 -(void) Setup
 {
     self.storiesByLevel =[[NSMutableDictionary alloc] init];
-    
-}
--(Story*) GetStoryNumber:(NSInteger)storyNum FromLevel:(NSInteger)levelNum
-{
-    
-    //dummy base class implementations
-    //needs to be overridden by the concrete classes
-    return NULL;
-    
-}
--(NSArray*) GetStoriesFromLevel:(NSInteger)level
-{
-    
-    //dummy base class implementations
-    //needs to be overridden by the concrete classes
-    return NULL;
     
 }
 

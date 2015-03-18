@@ -81,13 +81,13 @@
     
     //update the stories completd so far array
     //read from the file but for now just using a bogus array
-    NSMutableArray * newArray = [[NSMutableArray alloc] init];
+    NSMutableDictionary * newArray = [[NSMutableDictionary alloc] init];
     self.fixedStoryCounter = [[FixedStoriesCounter alloc] init];
-    NSInteger numberOfLevels = [self.storyXMLParser GetNumberOfLevels];
-    for (int i=0; i<numberOfLevels; i++) {
-        [newArray addObject:[NSNumber numberWithInt:0]];
+    NSArray* allLevels = [self.storyXMLParser GetAllLevels];
+    for (Level * level in allLevels) {
+        [newArray setObject:[NSNumber numberWithInt:0] forKey:level];
     }
-    [self.fixedStoryCounter UpdateCompletedStoriesByLevelArray:newArray];
+    [self.fixedStoryCounter UpdateCompletedStoriesByLevelDictionary:newArray];
     
     //initialize the story Dispatch service.
     self.storyDispatchService =[[StoryDispatchService alloc] init];

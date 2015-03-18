@@ -12,14 +12,13 @@
 
 @interface FixedStoriesCounter : NSObject
 
-@property ( atomic) NSMutableArray * completedStoriesByLevel;
+@property ( atomic) NSMutableDictionary * completedStoriesByLevel;
 
 -(id) initWithNumberOfLevels:(NSInteger)numberOfLevels;
-- (void) UpdateCompletedStoriesByLevelArray:(NSArray*) newArray;
+- (void) UpdateCompletedStoriesByLevelDictionary:(NSMutableDictionary*) newArray;
 - (NSInteger) GetNumberOfLevels;
-- (NSInteger) LastFixedStoryForLevel:(Level*)level; //use Level instead of NSInteger
-
-- (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story; //use Level instead of NSInteger
+- (NSInteger) LastFixedStoryForLevel:(Level*)level;
+- (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story;
 
 
 @end

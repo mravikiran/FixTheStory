@@ -134,38 +134,7 @@ self.element = [[NSMutableString
 }
 
 
--(Story*) GetStoryNumber:(NSInteger)storyNum FromLevel:(NSInteger)levelNum
-{
-    NSArray * stories;
-    for(Level *key in self.storiesByLevel)
-    {
-        if (key.number == levelNum) {
-            
-            stories = self.storiesByLevel[key];
-            break;
-        }
-    }
-    if ([stories count] < storyNum) {
-        storyNum = [stories count];
-    }
-    return stories[storyNum-1]; // presently its not returning any null value
-    
-}
 
--(NSArray*) GetStoriesFromLevel:(NSInteger)level { // change the interface to the object Level
-    
-    for (Level * key  in self.storiesByLevel) {
-        if (key.number == level) {
-            return self.storiesByLevel[key];
-        }
-    }
-    return nil;
-}
-
--(NSInteger)
-GetNumberOfLevels {
-    return [self.storiesByLevel count];
-}
 
 
 
