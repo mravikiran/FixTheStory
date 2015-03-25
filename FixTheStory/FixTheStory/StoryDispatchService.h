@@ -14,7 +14,7 @@
 @interface StoryDispatchService : NSObject
 
 
-- (Story*) getNextStoryFromParser:(StoryParser*)storyXMLParser givenFixedStoriesCounter:(FixedStoriesCounter*)fixedStoriesCounters updateLevel:(Level**)level;
+- (Story*) getNextStoryFromParser:(StoryParser*)storyXMLParser givenFixedStoriesCounter:(FixedStoriesCounter*)fixedStoriesCounters updateLevel:(Level**)level withCurrentLevel:(Level*)currentLevel;
 
 
 @end

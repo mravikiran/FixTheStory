@@ -60,13 +60,51 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.fixedStoryCounter = [[FixedStoriesCounter alloc] init];
     }
     return self;
 }
 
+- (NSInteger)GetMaxLevelNumber:(NSArray *)allLevels
+{
+    NSInteger maxLevel = 0;
+    for(NSNumber * level in allLevels)
+    {
+        if([level integerValue] > maxLevel)
+        {
+            maxLevel = [level integerValue];
+        }
+    }
+    return maxLevel;
+}
+
+- (void)RecieveDataFetchComplete
+{
+    //update the stories completd so far array
+    //read from the file but for now just using a bogus array
+//    NSMutableDictionary * newArray = [[NSMutableDictionary alloc] init];
+//    self.fixedStoryCounter = [[FixedStoriesCounter alloc] init];
+//    NSArray* allLevels = [self.storyJSONParser GetAllLevels];
+//    for (NSNumber * level in allLevels) {
+//        [newArray setObject:[NSNumber numberWithInt:0] forKey:level];
+//    }
+//    [self.fixedStoryCounter UpdateCompletedStoriesByLevelDictionary:newArray];
+
+    NSArray * allLevels = [self.storyJSONParser GetAllLevels];
+    NSInteger maxLevel;
+    maxLevel = [self GetMaxLevelNumber:allLevels];
+    self.fixedStoryCounter = [[FixedStoriesCounter alloc] initWithNumberOfLevels:maxLevel];
+    self.currentLevel = [[Level alloc] initWithNumber:1];
+    self.currentStory = nil;
+    self.storyNumber = 0;
+}
+
 - (void)viewDidLoad
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(RecieveDataFetchComplete)
+                                                 name:@"dataFetchComplete"
+                                               object:nil];
+    
     NSMutableArray * usedStoriesMap = [self getUsedStoriesMapFromStoryParser];
     NSString *xmlDataPath = [[NSBundle mainBundle] pathForResource:@"stories"
                                                      ofType:@"xml"];
@@ -77,17 +115,6 @@
     NSString *webServicePath = [NSString stringWithFormat:@"http://localhost:8080/getallstories"];
     self.storyJSONParser = [[StoryJSONParser alloc] init];
     [self.storyJSONParser LoadStoriesFromUrl:webServicePath];
-    
-    
-    //update the stories completd so far array
-    //read from the file but for now just using a bogus array
-    NSMutableDictionary * newArray = [[NSMutableDictionary alloc] init];
-    self.fixedStoryCounter = [[FixedStoriesCounter alloc] init];
-    NSArray* allLevels = [self.storyXMLParser GetAllLevels];
-    for (Level * level in allLevels) {
-        [newArray setObject:[NSNumber numberWithInt:0] forKey:level];
-    }
-    [self.fixedStoryCounter UpdateCompletedStoriesByLevelDictionary:newArray];
     
     //initialize the story Dispatch service.
     self.storyDispatchService =[[StoryDispatchService alloc] init];
@@ -127,6 +154,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 - (void) setCurrentSubViewController:(UIViewController*) cvc
 {
     currentSubViewController = cvc;
@@ -136,7 +165,10 @@
 {
     NSLog(@"This should spew Something");
 }
-
+- (NSInteger) getCurrentStoryNumber;
+{
+    return self.storyNumber;
+}
 
 
 - (void) showViewControllerWithName:(NSString*)vctype
@@ -227,10 +259,12 @@
 - (Story*) getNextStory {
     
     Level * level = [[Level alloc] init];
-    Story * story = [self.storyDispatchService getNextStoryFromParser:self.storyXMLParser givenFixedStoriesCounter:self.fixedStoryCounter updateLevel:&level];
+    Story * story = [self.storyDispatchService getNextStoryFromParser:self.storyJSONParser givenFixedStoriesCounter:self.fixedStoryCounter updateLevel:&level withCurrentLevel:self.currentLevel];
     self.currentStory = story;
     self.currentLevel = level;
-    
+    if (story) {
+        self.storyNumber = self.storyNumber + 1;
+    }
     return story;
 }
 

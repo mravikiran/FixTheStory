@@ -21,14 +21,19 @@
 @property (atomic) Level * currentLevel;
 @property (atomic) FixedStoriesCounter * fixedStoryCounter;
 @property (atomic) StoryDispatchService * storyDispatchService;
+@property (atomic) NSInteger storyNumber;
 
 - (void) setCurrentSubViewController:(UIViewController*) cvc;
 - (void) spewSomething;
 - (void) showViewControllerWithName:(NSString*)vctype;
 
 - (Story*) getNextStory;
+- (NSInteger) getCurrentStoryNumber;
 - (void)  updateLastFixedStoryCounter;
 - (NSMutableArray*) getUsedStoriesMapFromStoryParser;
 - (void) updateFixedStoriesCounter:(NSMutableArray*)previouslyAvailableFixedStories;
+- (void)RecieveDataFetchComplete;
+- (NSInteger)GetMaxLevelNumber:(NSArray *)allLevels;
+
 
 @end

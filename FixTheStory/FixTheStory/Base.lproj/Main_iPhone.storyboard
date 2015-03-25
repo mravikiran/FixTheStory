@@ -233,7 +233,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Rf6-xU-KKE">
-                                <rect key="frame" x="0.0" y="73" width="320" height="380"/>
+                                <rect key="frame" x="0.0" y="73" width="320" height="362"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewLayout key="collectionViewLayout" id="GLu-jy-DeG" customClass="RearrangeCollectionViewLayout"/>
                                 <cells/>
@@ -253,16 +253,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0wA-ud-7IF">
-                                        <rect key="frame" x="126" y="15" width="49" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Level n">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onLevelButton:" destination="deD-Gy-uTo" eventType="touchUpInside" id="Ic3-U4-8Gd"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="E64-Yb-ixz">
                                         <rect key="frame" x="15" y="15" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -273,11 +263,39 @@
                                             <action selector="onMain:" destination="deD-Gy-uTo" eventType="touchUpInside" id="Cfh-cQ-90A"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0wA-ud-7IF">
+                                        <rect key="frame" x="73" y="15" width="171" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Level n">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onLevelButton:" destination="deD-Gy-uTo" eventType="touchUpInside" id="Ic3-U4-8Gd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="vDE-b5-tQb">
+                                <rect key="frame" x="265" y="435" width="55" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.13797109906544724" green="0.9329032512626263" blue="0.085441075243594247" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Next&gt;&gt;">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="OnNext:" destination="deD-Gy-uTo" eventType="touchUpInside" id="pO1-xQ-N7z"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xFI-iB-bBm">
+                                <rect key="frame" x="0.0" y="435" width="265" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LEl-pk-aWK">
-                                <rect key="frame" x="25" y="450" width="270" height="30"/>
+                                <rect key="frame" x="25" y="442" width="270" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Well Done !! Go Back To Main Page">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -293,10 +311,12 @@
                         <outlet property="buttonHolderView" destination="lj1-Iz-AWE" id="Gx3-3N-PuZ"/>
                         <outlet property="collectionView" destination="Rf6-xU-KKE" id="BId-M7-jsz"/>
                         <outlet property="collectionViewLayout" destination="GLu-jy-DeG" id="hZL-J7-0E7"/>
+                        <outlet property="finishedStory" destination="xFI-iB-bBm" id="y5l-Me-bcr"/>
                         <outlet property="goBackToMain" destination="LEl-pk-aWK" id="yOA-q3-vgc"/>
                         <outlet property="levelButton" destination="0wA-ud-7IF" id="eSI-dJ-2wu"/>
                         <outlet property="levelContainer" destination="rgC-Hq-cqz" id="VON-5D-AdA"/>
                         <outlet property="mainButton" destination="E64-Yb-ixz" id="lAB-DV-XXT"/>
+                        <outlet property="nextStory" destination="vDE-b5-tQb" id="RxH-y4-KuA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WmP-I2-z1H" userLabel="First Responder" sceneMemberID="firstResponder"/>

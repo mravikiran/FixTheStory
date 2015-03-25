@@ -37,9 +37,9 @@
 -(Story*) GetStoryNumber:(NSInteger)storyNum FromLevel:(NSInteger)levelNum
 {
     NSArray * stories;
-    for(Level *key in self.storiesByLevel)
+    for(NSNumber *key in self.storiesByLevel)
     {
-        if (key.number == levelNum) {
+        if ([key integerValue] == levelNum) {
             
             stories = self.storiesByLevel[key];
             break;
@@ -59,8 +59,8 @@
 
 -(NSArray*) GetStoriesFromLevel:(Level*)level { // change the interface to the object Level
     
-    for (Level * key  in [self.storiesByLevel allKeys]) {
-        if (key.number == level.number) {
+    for (NSNumber * key  in [self.storiesByLevel allKeys]) {
+        if ([key integerValue] == level.number) {
             return self.storiesByLevel[key];
         }
     }

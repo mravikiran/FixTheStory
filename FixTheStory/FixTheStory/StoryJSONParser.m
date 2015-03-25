@@ -18,30 +18,12 @@
     return self;
 }
 
--(Level*) findLevel:(NSInteger)levelNum
-{
-    Level * returnLevel = nil;
-    for (Level* level in [self.storiesByLevel allKeys]) {
-        if (level.number == levelNum) {
-            return level;
-        }
-    }
-    returnLevel = [[Level alloc] initWithNumber:levelNum];
-    return returnLevel;
-}
-
 -(void) SetTags:(Story*) story GivenDictionary:(NSDictionary*)storyDictionary
 {
-    for (int i =1; i<=6; i++) {
+    for (int i =1; i<=story.numberOfImages; i++) {
         NSString *tagN = [NSString stringWithFormat:@"tag%d", i];
         NSString * partOfStory = storyDictionary[tagN];
-        if (![partOfStory isEqual:@".DS_Store"]) {
-            [story addPartOfStory:partOfStory];
-        }
-        else
-        {
-            [story addPartOfStory:@""];
-        }
+        [story addPartOfStory:partOfStory];
     }
 }
 
@@ -50,8 +32,8 @@
     Story * story = [[Story alloc] init];
     story.actualStory = storyDictionary[@"story"];
     story.numberOfImages =  [storyDictionary[@"story_size"] integerValue];
-    story.id = [storyDictionary[@"story_d"] integerValue];
-    
+    story.id = [storyDictionary[@"story_id"] integerValue];
+    [self SetTags:story GivenDictionary:storyDictionary];
     return story;
 }
 
@@ -60,15 +42,12 @@
     NSArray * stories = storiesAsJson[@"stories"];
     for(NSDictionary* storyDictionary in stories)
     {
-        NSLog([NSString stringWithFormat:@"Number of fields %lu", (unsigned long)[storyDictionary count]]);
-        NSLog(@"just for breaking");
-        
         Story * story = [self MakeStory:storyDictionary];
-        Level * level = [self findLevel:[storyDictionary[@"level"] integerValue]];
+        NSNumber * level = [NSNumber numberWithInteger:[storyDictionary[@"level"] integerValue]];
         NSMutableArray * storiesForLevel = [self.storiesByLevel objectForKey:level];
-        if(!storiesForLevel)
+        if (!storiesForLevel)
         {
-            storiesForLevel = [[NSMutableArray alloc]init];
+            storiesForLevel = [[NSMutableArray alloc] init];
         }
         [storiesForLevel addObject:story];
         [self.storiesByLevel setObject:storiesForLevel forKey:level];
@@ -89,9 +68,8 @@
             {
                 NSDictionary * stories = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
                 [self ParseJSONStories:stories];
-                NSLog([NSString stringWithFormat:@"Number of stories %lu",(unsigned long)[stories count]]);
-                
-                NSLog(@"just for breaking");
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"dataFetchComplete" object:nil];
             }
          
         }

@@ -23,6 +23,9 @@
 
 - (IBAction)onMain:(id)sender;
 @property (weak, nonatomic) IBOutlet RearrangeCollectionViewLayout *collectionViewLayout;
+@property (weak, nonatomic) IBOutlet UILabel *finishedStory;
+@property (weak, nonatomic) IBOutlet UIButton *nextStory;
+- (IBAction)OnNext:(id)sender;
 
 @property (strong, nonatomic) UITapGestureRecognizer * tapGestureRecognizer;
 @property (weak, nonatomic) IBOutlet UIButton *goBackToMain;

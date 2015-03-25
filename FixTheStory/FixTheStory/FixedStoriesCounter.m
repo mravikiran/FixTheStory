@@ -13,7 +13,7 @@
 -(id) init{
     self = [super init];
     if(self){
-        self.completedStoriesByLevel = [[NSMutableDictionary alloc] init];
+        self.completedStoriesByLevel = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -22,16 +22,17 @@
     
     self = [super init];
     if(self){
-        self.completedStoriesByLevel = [[NSMutableDictionary alloc] init];
-        for (int i=0; i<numberOfLevels; i++) {
-            [self.completedStoriesByLevel setObject:[NSNumber numberWithInteger:0] forKey:[[Level alloc] initWithNumber:(i+1)]];
+        self.completedStoriesByLevel = [[NSMutableArray alloc] init];
+        for (int i=0; i<numberOfLevels; i++)
+        {
+            [self.completedStoriesByLevel addObject:[NSNumber numberWithInteger:(NSInteger)0]];
         }
     }
     return self;
     
 }
 
-- (void) UpdateCompletedStoriesByLevelDictionary:(NSMutableDictionary*) newArray{
+- (void) UpdateCompletedStoriesByLevelDictionary:(NSMutableArray*) newArray{
     [self.completedStoriesByLevel removeAllObjects];
     self.completedStoriesByLevel = newArray;
     
@@ -41,22 +42,11 @@
     return [self.completedStoriesByLevel count];
 }
 
-- (Level*)GetEquivalentLevelInMap:(Level*)level {
-    for(Level * levelKey in [self.completedStoriesByLevel allKeys])
-    {
-        if (levelKey.number == level.number) {
-            return levelKey;
-        }
-    }
-    return nil;
-}
-
 - (NSInteger) LastFixedStoryForLevel:(Level*)level
 {
-    Level* levelInMap = [self GetEquivalentLevelInMap:level];
-    if(levelInMap)
+    if(level.number != 0)
     {
-        return [self.completedStoriesByLevel[levelInMap] integerValue];
+        return  [[self.completedStoriesByLevel objectAtIndex:level.number-1] integerValue];
     }
     else
     {
@@ -66,10 +56,9 @@
 
 - (void) UpdateLastFixedStoryForLevel:(Level*)level ToStory:(Story*) story
 {
-    Level* levelInMap = [self GetEquivalentLevelInMap:level];
-    if (levelInMap) {
+    if (level.number != 0) {
         NSInteger storyId = story? story.id : 0;
-        self.completedStoriesByLevel[levelInMap] = [NSNumber numberWithInteger:storyId];
+        [self.completedStoriesByLevel insertObject:[NSNumber numberWithInteger:storyId] atIndex:(level.number-1)];
     }
 }
 

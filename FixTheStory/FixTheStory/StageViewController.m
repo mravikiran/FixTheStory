@@ -12,7 +12,9 @@
 
 static NSString * const PhotoCellIdentifier = @"PhotoCell";
 
-static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTheStory/story_images";
+//static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTheStory/story_images";
+
+static NSString * const remoteImageFolder = @"http://localhost:8080/fts_test/public/images";
 
 const NSInteger ridiculouslyHighStoryId = 100000;
 
@@ -47,6 +49,10 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     // Do any additional setup after loading the view.
     self.collectionView.backgroundColor = [UIColor colorWithWhite:0.7f alpha:1.0f];
     self.goBackToMain.hidden = true;
+    self.finishedStory.hidden = true;
+    self.finishedStory.adjustsFontSizeToFitWidth = NO;
+    self.finishedStory.numberOfLines=0;
+    self.nextStory.hidden = true;
 
     
     [self.collectionView registerClass:[StagePhotoCell class]
@@ -134,7 +140,7 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     
     //photoCell.imageView.image = [UIImage imageNamed:imageName];
     //photoCell.uid = indexPath.row;
-    NSString * imagePath = [NSString stringWithFormat:@"%@/img%@.png",remoteImageFolder,storyImageName];
+    NSString * imagePath = [NSString stringWithFormat:@"%@/%@/1.png",remoteImageFolder,storyImageName];
 
     NSURL *url = [NSURL URLWithString:imagePath];
     NSError * err;
@@ -178,6 +184,7 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     if ([keyPath isEqualToString:@"parentViewController"])
     {
         self.story = [(ContainerViewController*)self.parentViewController getNextStory];
+        NSString * levelButtonTitle;
         if (!self.story) {
             Story * endStory = [[Story alloc] init];
             endStory.id = ridiculouslyHighStoryId;
@@ -187,9 +194,16 @@ const NSInteger ridiculouslyHighStoryId = 100000;
             [endStory addPartOfStory:@"natalie"];
             [endStory addPartOfStory:@"scarlette"];
             self.story = endStory;
+            levelButtonTitle= [NSString stringWithFormat:@"The End"];
         }
+        else
+        {
+            levelButtonTitle = [NSString stringWithFormat:@"Story %ld", (long)[(ContainerViewController*)self.parentViewController getCurrentStoryNumber]];
+        }
+        
+        [self.levelButton setTitle:levelButtonTitle forState:UIControlStateNormal];
     
-    self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:[self.story.partsOfStory count]];
+    self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:self.story.numberOfImages];
     for (int i=0; i<[self.story.partsOfStory count]; i++) {
         self.usedStoryLocationsArray[i]=[NSNumber numberWithInt:i];
     }
@@ -213,7 +227,10 @@ const NSInteger ridiculouslyHighStoryId = 100000;
         NSLog(@"Hurrah puzzle solved");
         [(ContainerViewController*)self.parentViewController updateLastFixedStoryCounter];
         if ([self parentViewController] && self.story.id != ridiculouslyHighStoryId) {
-            [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"success"];
+            [self.finishedStory setText: self.story.actualStory];
+            self.finishedStory.hidden = false;
+            self.nextStory.hidden = false;
+//            [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"success"];
             
         }
         else
@@ -278,4 +295,12 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     return YES;
 }
 
+- (IBAction)OnNext:(id)sender {
+    
+    if ([self parentViewController]) {
+        [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"stage"];
+        
+    }
+    
+}
 @end
