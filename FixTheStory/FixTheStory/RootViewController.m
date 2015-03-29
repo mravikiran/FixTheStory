@@ -47,7 +47,7 @@
 
 - (IBAction)onPlay:(id)sender {
     if ([self parentViewController]) {
-    [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"play"];
+    [(ContainerViewController*)[self parentViewController] showViewControllerWithName:@"stage"];
 
     }
 }

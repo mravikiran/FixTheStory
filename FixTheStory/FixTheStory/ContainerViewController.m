@@ -112,7 +112,9 @@
     self.storyXMLParser = [[StoryXMLParser alloc] init];
     [self.storyXMLParser LoadStoriesFromUrl:xmlDataPath];
     
-    NSString *webServicePath = [NSString stringWithFormat:@"http://localhost:8080/getallstories"];
+  //  NSString *webServicePath = [NSString stringWithFormat:@"http://localhost:8080/getallstories"];
+    NSString *webServicePath = [NSString stringWithFormat:@"http://nodejs-klicketyklack.rhcloud.com/getallstories"];
+
     self.storyJSONParser = [[StoryJSONParser alloc] init];
     [self.storyJSONParser LoadStoriesFromUrl:webServicePath];
     

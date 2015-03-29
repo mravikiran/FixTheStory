@@ -16,6 +16,7 @@
     self = [super init];
     if (self) {
         //custom initialization
+        self.number = 0;
     }
     
     return self;

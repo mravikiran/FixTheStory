@@ -20,6 +20,9 @@
 @property (atomic) Story * story;
 
 @property (atomic) NSMutableArray * usedStoryLocationsArray;
+@property (atomic) NSMutableArray * partsOfStoryLocationArray;
+@property (atomic) NSMutableArray * fixedStoryLocations;
+
 
 - (IBAction)onMain:(id)sender;
 @property (weak, nonatomic) IBOutlet RearrangeCollectionViewLayout *collectionViewLayout;
@@ -38,6 +41,6 @@
 - (void) handleTapOnParentView:(UITapGestureRecognizer*)tapRecognizer;
 - (void) spewSomething;
 - (void) handleCollectionViewRearrangementComplete;
-- (NSInteger) getRandomLocation;
+- (NSInteger) getRandomLocationforPosition:(NSInteger)actualIndex;
 
 @end

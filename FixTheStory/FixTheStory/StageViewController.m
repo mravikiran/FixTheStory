@@ -14,7 +14,9 @@ static NSString * const PhotoCellIdentifier = @"PhotoCell";
 
 //static NSString * const remoteImageFolder = @"https://mravikiran.github.io/FixTheStory/story_images";
 
-static NSString * const remoteImageFolder = @"http://localhost:8080/fts_test/public/images";
+//static NSString * const remoteImageFolder = @"http://localhost:8080/fts_test/public/images";
+
+static NSString * const remoteImageFolder = @"http://nodejs-klicketyklack.rhcloud.com/fts_test/public/images";
 
 const NSInteger ridiculouslyHighStoryId = 100000;
 
@@ -133,7 +135,8 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     [collectionView dequeueReusableCellWithReuseIdentifier:PhotoCellIdentifier
                                               forIndexPath:indexPath];
     
-    NSInteger randomPosition = [self getRandomLocation];
+   // NSInteger randomPosition = [self getRandomLocationforPosition:indexPath.row];
+    NSInteger randomPosition = [self.partsOfStoryLocationArray[indexPath.row] integerValue];
     NSString * storyImageName = self.story.partsOfStory[randomPosition];
     
    // NSString * imageName = [NSString stringWithFormat:@"img%@.png",storyImageName];
@@ -162,11 +165,11 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     }
 }
 
-- (NSInteger) getRandomLocation
+- (NSInteger) getRandomLocationforPosition:(NSInteger)actualIndex
 {
     
     NSInteger size = [self.usedStoryLocationsArray count];
-    NSInteger randomNumber=0;
+    NSInteger randomNumber=actualIndex;
     if(size>0){
         NSInteger position = arc4random()%size;
         randomNumber = [self.usedStoryLocationsArray[position] integerValue];
@@ -204,16 +207,42 @@ const NSInteger ridiculouslyHighStoryId = 100000;
         [self.levelButton setTitle:levelButtonTitle forState:UIControlStateNormal];
     
     self.usedStoryLocationsArray = [[NSMutableArray alloc] initWithCapacity:self.story.numberOfImages];
+    self.partsOfStoryLocationArray = [[NSMutableArray alloc] initWithCapacity:self.story.numberOfImages];
+
     for (int i=0; i<[self.story.partsOfStory count]; i++) {
         self.usedStoryLocationsArray[i]=[NSNumber numberWithInt:i];
+        self.partsOfStoryLocationArray[i]=[NSNumber numberWithInt:i];
     }
+    [self ShufflePositions:self.partsOfStoryLocationArray];
+
     }
 }
 
+-(void) ShufflePositions:(NSMutableArray*)storyLocationArray
+{
+    bool notShuffled = true;
+    while (notShuffled)
+    {
+        NSInteger size = [storyLocationArray count];
+        while(size > 0)
+        {
+            NSInteger position = arc4random()%size;
+            [storyLocationArray exchangeObjectAtIndex:position withObjectAtIndex:(size-1)];
+            size--;
+        }
+        notShuffled = true;
+        for( NSInteger i = 0 ; i < [storyLocationArray count];i++)
+        {
+           if([storyLocationArray[i] integerValue] != i)
+           {
+               notShuffled = false;
+               break;
+           }
+        }
+   }
+}
 
-//Todo : handle multiple solutions  to the puzzle.
--(void) handleCollectionViewRearrangementComplete {
-
+- (int)GetNumberOfMatchedCells {
     int matchedCells=0;
     for(StagePhotoCell* cell in self.collectionView.visibleCells){
         NSIndexPath * indexPath = [self.collectionView indexPathForCell:cell];
@@ -222,6 +251,14 @@ const NSInteger ridiculouslyHighStoryId = 100000;
         }
         
     }
+    return matchedCells;
+}
+
+//Todo : handle multiple solutions  to the puzzle.
+-(void) handleCollectionViewRearrangementComplete {
+
+    int matchedCells;
+    matchedCells = [self GetNumberOfMatchedCells];
     if(matchedCells == self.story.numberOfImages)
     {
         NSLog(@"Hurrah puzzle solved");

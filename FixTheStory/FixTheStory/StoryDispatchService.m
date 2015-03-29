@@ -14,18 +14,20 @@
 
 - (Story*) getNextStoryFromParser:(StoryParser*)storyParser givenFixedStoriesCounter:(FixedStoriesCounter*)fixedStoriesCounter updateLevel:(Level **)level withCurrentLevel:(Level *)currentLevel
 {
-    
-    for (NSInteger i = currentLevel.number-1; i<[fixedStoriesCounter GetNumberOfLevels]; i++)
+    if (currentLevel.number > 0)
     {
-        Level *  keyLevel= [[Level alloc] initWithNumber:i];
-        NSArray * stories = [storyParser GetStoriesFromLevel:keyLevel];
-        NSInteger completedStoryId = [fixedStoriesCounter LastFixedStoryForLevel:keyLevel];
-        for(Story *story in stories)
+        for (NSInteger i = currentLevel.number-1; i<[fixedStoriesCounter GetNumberOfLevels]; i++)
         {
-            if(story.id > completedStoryId)
+            Level *  keyLevel= [[Level alloc] initWithNumber:i];
+            NSArray * stories = [storyParser GetStoriesFromLevel:keyLevel];
+            NSInteger completedStoryId = [fixedStoriesCounter LastFixedStoryForLevel:keyLevel];
+            for(Story *story in stories)
             {
-                (*level).number = keyLevel.number;
-                return story;
+                if(story.id > completedStoryId)
+                {
+                    (*level).number = keyLevel.number;
+                    return story;
+                }
             }
         }
     }
