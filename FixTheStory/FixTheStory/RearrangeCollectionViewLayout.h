@@ -22,5 +22,9 @@
 
 @property (strong, nonatomic) UIPanGestureRecognizer *panGestureRecognizer;
 
+- (void)enableGestures;
+- (void)disableGestures;
+
+
 
 @end

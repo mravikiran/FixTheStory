@@ -188,9 +188,17 @@ static  NSString * const collectionViewKey = @"collectionView";
 
 
 
-- (void)handleApplicationWillResignActive:(NSNotification *)notification {
+- (void)disableGestures {
     self.panGestureRecognizer.enabled = NO;
+}
+
+- (void)enableGestures {
     self.panGestureRecognizer.enabled = YES;
+}
+
+- (void)handleApplicationWillResignActive:(NSNotification *)notification {
+    [self disableGestures];
+    [self enableGestures];
 }
 
 

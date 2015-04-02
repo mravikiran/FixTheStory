@@ -23,7 +23,8 @@
 @property (atomic) NSMutableArray * partsOfStoryLocationArray;
 @property (atomic) NSMutableArray * fixedStoryLocations;
 
-
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *imageLoadingIndicator;
+@property (nonatomic) NSInteger loadedImageCount;
 - (IBAction)onMain:(id)sender;
 @property (weak, nonatomic) IBOutlet RearrangeCollectionViewLayout *collectionViewLayout;
 @property (weak, nonatomic) IBOutlet UILabel *finishedStory;

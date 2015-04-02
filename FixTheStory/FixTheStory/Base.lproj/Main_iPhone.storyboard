@@ -51,7 +51,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="playButton" destination="x7e-Py-fMH" id="4cz-60-J3n"/>
@@ -304,6 +304,11 @@
                                     <action selector="onMain:" destination="deD-Gy-uTo" eventType="touchUpInside" id="sEU-aS-CUp"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="whiteLarge" id="FeY-fm-h5L">
+                                <rect key="frame" x="142" y="213" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -313,6 +318,7 @@
                         <outlet property="collectionViewLayout" destination="GLu-jy-DeG" id="hZL-J7-0E7"/>
                         <outlet property="finishedStory" destination="xFI-iB-bBm" id="y5l-Me-bcr"/>
                         <outlet property="goBackToMain" destination="LEl-pk-aWK" id="yOA-q3-vgc"/>
+                        <outlet property="imageLoadingIndicator" destination="FeY-fm-h5L" id="3V4-hP-TYN"/>
                         <outlet property="levelButton" destination="0wA-ud-7IF" id="eSI-dJ-2wu"/>
                         <outlet property="levelContainer" destination="rgC-Hq-cqz" id="VON-5D-AdA"/>
                         <outlet property="mainButton" destination="E64-Yb-ixz" id="lAB-DV-XXT"/>

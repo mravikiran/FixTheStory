@@ -55,6 +55,9 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     self.finishedStory.adjustsFontSizeToFitWidth = NO;
     self.finishedStory.numberOfLines=0;
     self.nextStory.hidden = true;
+    [self.collectionViewLayout disableGestures];
+    self.loadedImageCount=0;
+    [self.imageLoadingIndicator startAnimating];
 
     
     [self.collectionView registerClass:[StagePhotoCell class]
@@ -128,6 +131,32 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     return 0;
 }
 
+-(void) DownloadImageWithUrl:(NSString*)imagePath completionBlock:(void(^)(BOOL succeeded, UIImage *image))completedBlock
+{
+    
+    NSURL *url = [NSURL URLWithString:imagePath];
+    
+    
+    NSURLRequest* request = [NSURLRequest requestWithURL:url];
+    
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue]  completionHandler:
+     ^(NSURLResponse * response , NSData *data, NSError * connectionError)
+     {
+         if (!connectionError)
+         {
+             UIImage * image = [[UIImage alloc] initWithData:data];
+             completedBlock(YES,image);
+         }
+         else
+         {
+             completedBlock(NO,nil);
+         }
+     }
+     ];
+
+    
+}
+
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -145,14 +174,33 @@ const NSInteger ridiculouslyHighStoryId = 100000;
     //photoCell.uid = indexPath.row;
     NSString * imagePath = [NSString stringWithFormat:@"%@/%@/1.png",remoteImageFolder,storyImageName];
 
-    NSURL *url = [NSURL URLWithString:imagePath];
-    NSError * err;
-    NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&err];
+  //  NSURL *url = [NSURL URLWithString:imagePath];
+  //  NSError * err;
+  //  NSData *data = [NSData dataWithContentsOfURL:url options:NSDataReadingUncached error:&err];
+    
+    [self DownloadImageWithUrl:imagePath completionBlock:^(BOOL result, UIImage* image){
+        if(result)
+        {
+            photoCell.imageView.image = image;
+            self.loadedImageCount = self.loadedImageCount + 1;
+            if(self.loadedImageCount == self.story.numberOfImages)
+            {
+                [self.imageLoadingIndicator stopAnimating];
+                self.imageLoadingIndicator.hidden = YES;
+                [self.collectionViewLayout enableGestures];
+
+            }
+        }
+        else
+        {
+            photoCell.imageView.image = [UIImage imageNamed:@"jhaalar_bg.png"];
+        }
+
+    }];
     
     //Error handle here
     //Inform that either there is no internet or 4g or watever.
-    // Hence the need of imagefetcher is much ore evident. because stage view controller should not contain the logic of fetching the image.
-    photoCell.imageView.image = [[UIImage alloc] initWithData:data];
+    // Hence the need of imagefetcher is much more evident. because stage view controller should not contain the logic of fetching the image.
     photoCell.uid = randomPosition;
     return photoCell;
 }

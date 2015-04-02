@@ -26,6 +26,8 @@
 		06147780195D35DE00BF1DAB /* StoryDispatchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0614777F195D35DE00BF1DAB /* StoryDispatchService.m */; };
 		06147786195F80FF00BF1DAB /* FixedStoriesCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 06147785195F80FF00BF1DAB /* FixedStoriesCounter.m */; };
 		0614778919738D3B00BF1DAB /* SuccessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0614778819738D3B00BF1DAB /* SuccessViewController.m */; };
+		0632C8231AC9139A00BCE4E5 /* jhaalar_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 0632C8221AC9139A00BCE4E5 /* jhaalar_bg.png */; };
+		0632C8291AC91AD300BCE4E5 /* fatehpur_corrected.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0632C8281AC91AD300BCE4E5 /* fatehpur_corrected.jpg */; };
 		068B543F18E50CAF0096F16B /* FixTheStoryBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */; };
 		06940D2418C177B4002C1A42 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2318C177B4002C1A42 /* Foundation.framework */; };
 		06940D2618C177B4002C1A42 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06940D2518C177B4002C1A42 /* CoreGraphics.framework */; };
@@ -98,6 +100,8 @@
 		06147785195F80FF00BF1DAB /* FixedStoriesCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedStoriesCounter.m; sourceTree = "<group>"; };
 		0614778719738D3B00BF1DAB /* SuccessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SuccessViewController.h; sourceTree = "<group>"; };
 		0614778819738D3B00BF1DAB /* SuccessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SuccessViewController.m; sourceTree = "<group>"; };
+		0632C8221AC9139A00BCE4E5 /* jhaalar_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jhaalar_bg.png; sourceTree = "<group>"; };
+		0632C8281AC91AD300BCE4E5 /* fatehpur_corrected.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fatehpur_corrected.jpg; sourceTree = "<group>"; };
 		068B543D18E50CAF0096F16B /* FixTheStoryBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixTheStoryBaseViewController.h; sourceTree = "<group>"; };
 		068B543E18E50CAF0096F16B /* FixTheStoryBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixTheStoryBaseViewController.m; sourceTree = "<group>"; };
 		06940D2018C177B4002C1A42 /* FixTheStory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FixTheStory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +344,8 @@
 		069AF08C18ECD14A0045338E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0632C8281AC91AD300BCE4E5 /* fatehpur_corrected.jpg */,
+				0632C8221AC9139A00BCE4E5 /* jhaalar_bg.png */,
 				0614776A195BA9ED00BF1DAB /* imgelephant.png */,
 				0614776B195BA9ED00BF1DAB /* imgfive.png */,
 				0614776C195BA9ED00BF1DAB /* imgfour.png */,
@@ -446,12 +452,14 @@
 				069AF09618ECD1810045338E /* img3.jpg in Resources */,
 				060A8B7B19480F80006A7B5A /* stories.xml in Resources */,
 				06147778195BA9ED00BF1DAB /* imgone.png in Resources */,
+				0632C8291AC91AD300BCE4E5 /* fatehpur_corrected.jpg in Resources */,
 				069AF09918ECD1810045338E /* imgscarlette.jpg in Resources */,
 				06147775195BA9ED00BF1DAB /* imgfive.png in Resources */,
 				06940D3F18C177B5002C1A42 /* Images.xcassets in Resources */,
 				06940D3718C177B4002C1A42 /* Main_iPhone.storyboard in Resources */,
 				0614777D195BA9ED00BF1DAB /* imgtwo.png in Resources */,
 				069AF09A18ECD1810045338E /* img7.jpg in Resources */,
+				0632C8231AC9139A00BCE4E5 /* jhaalar_bg.png in Resources */,
 				0614777B195BA9ED00BF1DAB /* imgthe.png in Resources */,
 				0614777C195BA9ED00BF1DAB /* imgthree.png in Resources */,
 				06147776195BA9ED00BF1DAB /* imgfour.png in Resources */,

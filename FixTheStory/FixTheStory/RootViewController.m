@@ -21,7 +21,10 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.subContainer.hidden = YES;
     [self.subContainer setOpaque:true];
-    self.subContainer.backgroundColor = [UIColor whiteColor];
+    //self.subContainer.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"fatehpur_corrected.jpg"]];
+
+
     
     [self.view bringSubviewToFront:self.subContainer];
 

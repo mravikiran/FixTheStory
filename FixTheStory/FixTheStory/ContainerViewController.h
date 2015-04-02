@@ -13,7 +13,7 @@
 #import "Story.h"
 #import "StoryDispatchService.h"
 
-@interface ContainerViewController : UIViewController 
+@interface ContainerViewController : UIViewController <NSCoding>
 
 @property (atomic) StoryParser * storyXMLParser;
 @property (atomic) StoryParser * storyJSONParser;
